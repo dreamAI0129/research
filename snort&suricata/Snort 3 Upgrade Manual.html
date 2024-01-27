@@ -1,0 +1,2749 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- saved from url=(0377)https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240119T060951Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="AsciiDoc 8.6.10">
+<title>Snort 3 Upgrade Manual</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+@media screen {
+  body {
+    max-width: 50em; /* approximately 80 characters wide */
+    margin-left: 16em;
+  }
+
+  #toc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 13em;
+    padding: 0.5em;
+    padding-bottom: 1.5em;
+    margin: 0;
+    overflow: auto;
+    border-right: 3px solid #f8f8f8;
+    background-color: white;
+  }
+
+  #toc .toclevel1 {
+    margin-top: 0.5em;
+  }
+
+  #toc .toclevel2 {
+    margin-top: 0.25em;
+    display: list-item;
+    color: #aaaaaa;
+  }
+
+  #toctitle {
+    margin-top: 0.5em;
+  }
+}
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Snort 3 Upgrade Manual</h1>
+<span id="author">The Snort Team</span><br>
+<span id="revnumber">version 3.1.78.0,</span>
+<span id="revdate">2024-01-16 01:23:55 EST</span>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div id="toc">
+  <div id="toctitle">Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+<div class="toclevel1"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_overview">Overview</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_efficacy">Efficacy</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_performance">Performance</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_scalability">Scalability</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_usability">Usability</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_extensibility">Extensibility</a></div><div class="toclevel1"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_snort_3_vs_snort_2">Snort 3 vs Snort 2</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_features_new_to_snort_3">Features New to Snort 3</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_features_improved_over_snort_2">Features Improved over Snort 2</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_build_options">Build Options</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_command_line">Command Line</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_conf_file">Conf File</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_rules">Rules</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_output">Output</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_sensitive_data">Sensitive Data</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_features_not_yet_supported_by_snort_3">Features Not Yet Supported by Snort 3</a></div><div class="toclevel1"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_snort2lua">Snort2Lua</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_snort2lua_command_line">Snort2Lua Command Line</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_known_problems">Known Problems</a></div><div class="toclevel2"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_usage">Usage</a></div><div class="toclevel1"><a href="https://snort-org-site.s3.amazonaws.com/production/release_files/files/000/037/701/original/snort_upgrade.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU7AK5ITMJQBJPARJ%2F20240119%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240119T060951Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=19dc6baa9abd6feaf1702d48c19f7320ecfa60082950eebb9ce96e0223bfb26f#_configuration_changes">Configuration Changes</a></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview">Overview</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Snort 3.0 is an updated version of the Snort Intrusion Prevention System (IPS) which features a new
+design that provides a superset of Snort 2.X functionality with better efficacy, performance,
+scalability, usability, and extensibility.  Some of the key features of Snort 3.0 are:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Support multiple packet processing threads
+</p>
+</li>
+<li>
+<p>
+Use a shared configuration and attribute table
+</p>
+</li>
+<li>
+<p>
+Autodetect services for portless configuration
+</p>
+</li>
+<li>
+<p>
+Modular design
+</p>
+</li>
+<li>
+<p>
+Plugin framework with over 200 plugins
+</p>
+</li>
+<li>
+<p>
+More scalable memory profile
+</p>
+</li>
+<li>
+<p>
+LuaJIT configuration, loggers, and rule options
+</p>
+</li>
+<li>
+<p>
+Hyperscan support
+</p>
+</li>
+<li>
+<p>
+Rewritten TCP handling
+</p>
+</li>
+<li>
+<p>
+New rule parser and syntax
+</p>
+</li>
+<li>
+<p>
+Service rules like alert http
+</p>
+</li>
+<li>
+<p>
+Rule "sticky" buffers
+</p>
+</li>
+<li>
+<p>
+Way better SO rules
+</p>
+</li>
+<li>
+<p>
+New HTTP inspector
+</p>
+</li>
+<li>
+<p>
+New performance monitor
+</p>
+</li>
+<li>
+<p>
+New time and space profiling
+</p>
+</li>
+<li>
+<p>
+New latency monitoring and enforcement
+</p>
+</li>
+<li>
+<p>
+Inspection Events
+</p>
+</li>
+<li>
+<p>
+Autogenerate reference documentation
+</p>
+</li>
+</ul></div>
+<div class="sect2">
+<h3 id="_efficacy">Efficacy</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Detects and blocks all but 10 HTTP Evader tests (see <a href="https://noxxi.de/research/http-evader.html">https://noxxi.de/research/http-evader.html</a>).
+</p>
+</li>
+<li>
+<p>
+Autodetection of services reduces misses due to incorrect or out of date port configurations and
+  improves detection on unexpected command and control channels.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_performance">Performance</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Vastly improved throughput over Snort 2 for deep flow inspection.
+</p>
+</li>
+<li>
+<p>
+Many more fast pattern buffers means fewer non-fast pattern rules.
+</p>
+</li>
+<li>
+<p>
+Hyperscan is used for faster fast patterns, content literals and (optionally) compatible PCRE
+  during signature evaluation, and various searches done by inspectors.
+</p>
+</li>
+<li>
+<p>
+sd_pattern rules have normal fast patterns, don’t require extra searches.
+</p>
+</li>
+<li>
+<p>
+The snort3_demo repo has a performance suite that can be used to compare Snort 2 and Snort 3.
+</p>
+</li>
+<li>
+<p>
+The DAQ 3 interface facilitates leveraging your data plane for maximum throughput including
+  checksum offload and acquisition of a vector of packets.
+</p>
+</li>
+<li>
+<p>
+Snort 3 is not run-to-completion, making it possible to detain packets for lookaside acceleration
+  and other new features.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_scalability">Scalability</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Much easier to leverage multiple cores.
+</p>
+</li>
+<li>
+<p>
+All packet threads share configuration and rule engine which frees up much more memory for packet
+  processing.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_usability">Usability</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Sticky buffers make it easier to write correct rules.
+</p>
+</li>
+<li>
+<p>
+Autodetection eliminates much port configuration maintenance.
+</p>
+</li>
+<li>
+<p>
+Service-based detection doesn’t preclude port-based detection.
+</p>
+</li>
+<li>
+<p>
+Builtin defaults and policy tweaks make effective tuning much simpler.
+</p>
+</li>
+<li>
+<p>
+Command line help and generated reference documentation make it easy to get the correct
+  configuration details.
+</p>
+</li>
+<li>
+<p>
+A trace mechanism is provided to make it easy to see how packets are processed.
+</p>
+</li>
+<li>
+<p>
+Build a scaled down image and configure for smaller systems such as IoT devices.
+</p>
+</li>
+<li>
+<p>
+The snort2lua utility (described later) makes it easy to convert your local rules.
+</p>
+</li>
+<li>
+<p>
+Extensive peg counts capture the important events and actions to provide more detailed insight
+  into your deployment.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_extensibility">Extensibility</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Several plugin types are defined and over 220 plugins are available.
+</p>
+</li>
+<li>
+<p>
+Inspection events make collaboration among plugins possible without framework updates.
+</p>
+</li>
+<li>
+<p>
+All plugins, including SO rules, can be mixed in the same library.
+</p>
+</li>
+<li>
+<p>
+A command line shell is available for reloads and other operations.
+</p>
+</li>
+<li>
+<p>
+The snort3_extra repo has examples to each plugin type to help you get started.
+</p>
+</li>
+<li>
+<p>
+Easy to add SO rules for 0-day attacks.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_snort_3_vs_snort_2">Snort 3 vs Snort 2</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_features_new_to_snort_3">Features New to Snort 3</h3>
+<div class="paragraph"><p>Some things Snort++ can do today that Snort can not do:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+regex fast patterns, not just literals
+</p>
+</li>
+<li>
+<p>
+JSON perf monitor logs
+</p>
+</li>
+<li>
+<p>
+LuaJIT scriptable rule options and loggers
+</p>
+</li>
+<li>
+<p>
+pub/sub inspection events (currently used by sip and http_inspect to appid)
+</p>
+</li>
+<li>
+<p>
+JIT buffer stuffers (notably with new http_inspect)
+</p>
+</li>
+<li>
+<p>
+C-style comments in rules
+</p>
+</li>
+<li>
+<p>
+#begin … #end comment blocks in rules
+</p>
+</li>
+<li>
+<p>
+rule remarks (comment is part of rule, not just in it)
+</p>
+</li>
+<li>
+<p>
+process raw files (eg read a PDF and do file processing)
+</p>
+</li>
+<li>
+<p>
+process raw payload (eg bridge 2 sockets and do inspection)
+</p>
+</li>
+<li>
+<p>
+fast pattern offload to separate thread (experimental)
+</p>
+</li>
+<li>
+<p>
+add or override any config item on command line
+</p>
+</li>
+<li>
+<p>
+set CPU affinity
+</p>
+</li>
+<li>
+<p>
+pause and resume commands
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_features_improved_over_snort_2">Features Improved over Snort 2</h3>
+<div class="paragraph"><p>Some things Snort++ can do today that Snort can not do as well:</p></div>
+<div class="tableblock">
+<table rules="all" width="100%" frame="border" cellspacing="0" cellpadding="4">
+<colgroup><col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup><tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Feature</p></td>
+<td align="left" valign="top"><p class="table">Snort 2</p></td>
+<td align="left" valign="top"><p class="table">Snort 3</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Packet Threads</p></td>
+<td align="left" valign="top"><p class="table">1 per process</p></td>
+<td align="left" valign="top"><p class="table">N per process</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Config Memory Use</p></td>
+<td align="left" valign="top"><p class="table">N processes * M GB</p></td>
+<td align="left" valign="top"><p class="table">M GB total, more for packets</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Config Reload</p></td>
+<td align="left" valign="top"><p class="table">N processes, slower</p></td>
+<td align="left" valign="top"><p class="table">1 thread, can be pinned to separate core</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Startup</p></td>
+<td align="left" valign="top"><p class="table">Single threaded, slower</p></td>
+<td align="left" valign="top"><p class="table">Multithreaded, faster</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Plugins</p></td>
+<td align="left" valign="top"><p class="table">Limited to preprocs and outputs</p></td>
+<td align="left" valign="top"><p class="table">Full plugin system with over 230 plugins</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Plugin Examples</p></td>
+<td align="left" valign="top"><p class="table">DPX preproc</p></td>
+<td align="left" valign="top"><p class="table">snort3_extra repo, all types, LuaJIT</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">DAQ</p></td>
+<td align="left" valign="top"><p class="table">2.X, run to completion</p></td>
+<td align="left" valign="top"><p class="table">3.X, vector input, multiple outstanding packets</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">DAQ Modules</p></td>
+<td align="left" valign="top"><p class="table">Legacy modules</p></td>
+<td align="left" valign="top"><p class="table">Stacked modules, IOCTLs, file, socket, text modules</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Pcap Readback Speed</p></td>
+<td align="left" valign="top"><p class="table">X Mbits/sec for Max-Detect</p></td>
+<td align="left" valign="top"><p class="table">2X with ac, 4X with hyperscan</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">IP Layers</p></td>
+<td align="left" valign="top"><p class="table">2 max</p></td>
+<td align="left" valign="top"><p class="table">Arbitrary / configurable limits</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">IP Reputation</p></td>
+<td align="left" valign="top"><p class="table">Complex, shared memory</p></td>
+<td align="left" valign="top"><p class="table">Simplified process memory</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Stream TCP</p></td>
+<td align="left" valign="top"><p class="table">Complex implementation</p></td>
+<td align="left" valign="top"><p class="table">New and improved implementation</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Service detection</p></td>
+<td align="left" valign="top"><p class="table">appid only, port configs required</p></td>
+<td align="left" valign="top"><p class="table">Autodetection, most port configs optional</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">HTTP inspector</p></td>
+<td align="left" valign="top"><p class="table">Partly stateful</p></td>
+<td align="left" valign="top"><p class="table">Fully stateful</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">HTTP Evader</p></td>
+<td align="left" valign="top"><p class="table">65 misses</p></td>
+<td align="left" valign="top"><p class="table">10 misses</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Port Scan Detection</p></td>
+<td align="left" valign="top"><p class="table">High, medium, low thresholds only</p></td>
+<td align="left" valign="top"><p class="table">Fully configurable detection thresholds</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Config parsing</p></td>
+<td align="left" valign="top"><p class="table">Report one error and quit</p></td>
+<td align="left" valign="top"><p class="table">Report all errors</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Config syntax</p></td>
+<td align="left" valign="top"><p class="table">Irregular, static, limited variables</p></td>
+<td align="left" valign="top"><p class="table">Lua, fully scriptable, arbitrary variables</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Command Line</p></td>
+<td align="left" valign="top"><p class="table">Some overlap with config file</p></td>
+<td align="left" valign="top"><p class="table">Set or override any config from command line</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Default Config</p></td>
+<td align="left" valign="top"><p class="table">Complex, needs tuning</p></td>
+<td align="left" valign="top"><p class="table">Simplified, effective default config</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Policy Examples</p></td>
+<td align="left" valign="top"><p class="table">None</p></td>
+<td align="left" valign="top"><p class="table">Tweaks for all standard Talos policies</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Policy Bindings</p></td>
+<td align="left" valign="top"><p class="table">One level</p></td>
+<td align="left" valign="top"><p class="table">Nested</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Rule syntax</p></td>
+<td align="left" valign="top"><p class="table">Inconsistent, requires line escapes</p></td>
+<td align="left" valign="top"><p class="table">Uniform syntax, arbitrary whitespace</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Rule parsing</p></td>
+<td align="left" valign="top"><p class="table">Buggy, limited warnings</p></td>
+<td align="left" valign="top"><p class="table">Robust, many optional warnings</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Rule comments</p></td>
+<td align="left" valign="top"><p class="table"># comments only</p></td>
+<td align="left" valign="top"><p class="table">#, #begin/#end, C-style, rem option</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Rule input</p></td>
+<td align="left" valign="top"><p class="table">Config includes only</p></td>
+<td align="left" valign="top"><p class="table">Includes, external file or path, stdin</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Hyperscan</p></td>
+<td align="left" valign="top"><p class="table">External patch available</p></td>
+<td align="left" valign="top"><p class="table">Native support, regex fast patterns</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Sensitive Data</p></td>
+<td align="left" valign="top"><p class="table">Requires a slow, extra search</p></td>
+<td align="left" valign="top"><p class="table">Normal fast pattern rule</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">alert file rules</p></td>
+<td align="left" valign="top"><p class="table">No</p></td>
+<td align="left" valign="top"><p class="table">Yes</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">alert service rules</p></td>
+<td align="left" valign="top"><p class="table">No</p></td>
+<td align="left" valign="top"><p class="table">Yes</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">fast_pattern_only</p></td>
+<td align="left" valign="top"><p class="table">Hand optimization</p></td>
+<td align="left" valign="top"><p class="table">Automatic optimization</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Fast Pattern Buffers</p></td>
+<td align="left" valign="top"><p class="table">6 available</p></td>
+<td align="left" valign="top"><p class="table">14 available</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Elided rule headers</p></td>
+<td align="left" valign="top"><p class="table">No</p></td>
+<td align="left" valign="top"><p class="table">Yes (omit nets and/or ports)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Rule sticky buffers</p></td>
+<td align="left" valign="top"><p class="table">Some</p></td>
+<td align="left" valign="top"><p class="table">All buffers are sticky</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">SO rule features</p></td>
+<td align="left" valign="top"><p class="table">Restricted functionality</p></td>
+<td align="left" valign="top"><p class="table">True superset of text rules</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Simple SO rules</p></td>
+<td align="left" valign="top"><p class="table">No (based on tedious C-structs)</p></td>
+<td align="left" valign="top"><p class="table">Yes (based on text rule)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Dump builtin stubs</p></td>
+<td align="left" valign="top"><p class="table">No (SO stubs only)</p></td>
+<td align="left" valign="top"><p class="table">Yes</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Runtime tracing</p></td>
+<td align="left" valign="top"><p class="table">No (debug traces and misc logs only)</p></td>
+<td align="left" valign="top"><p class="table">Yes</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Event Logging</p></td>
+<td align="left" valign="top"><p class="table">Legacy unified2 recommended</p></td>
+<td align="left" valign="top"><p class="table">JSON recommended, integrates with ELK stack, etc.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Statistics</p></td>
+<td align="left" valign="top"><p class="table">Limited counts, fixed perf monitor</p></td>
+<td align="left" valign="top"><p class="table">2X counts, configurable perf monitor</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Control interface</p></td>
+<td align="left" valign="top"><p class="table">Limited binary interface</p></td>
+<td align="left" valign="top"><p class="table">Extensible text shell, socket access</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Documentation</p></td>
+<td align="left" valign="top"><p class="table">LaTeX-based PDF, READMEs</p></td>
+<td align="left" valign="top"><p class="table">Asciidoc text, html, and PDF (user, ref, dev, upgrade)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Command line help</p></td>
+<td align="left" valign="top"><p class="table">No</p></td>
+<td align="left" valign="top"><p class="table">Extensive, supports data driven management</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Build system</p></td>
+<td align="left" valign="top"><p class="table">Automake, Linux, *BSD, Windows</p></td>
+<td align="left" valign="top"><p class="table">Cmake, Linux, *BSD, Mac</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Startup / Shutdown</p></td>
+<td align="left" valign="top"><p class="table">Noisy, limited</p></td>
+<td align="left" valign="top"><p class="table">Clean, extensible, non-zero counts only</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Sig Quit</p></td>
+<td align="left" valign="top"><p class="table">Same as Sig Term and Sig Int</p></td>
+<td align="left" valign="top"><p class="table">Quick exit</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Source Code</p></td>
+<td align="left" valign="top"><p class="table">470K lines C, avg 400 lines/file</p></td>
+<td align="left" valign="top"><p class="table">389K lines C++, avg 200 lines/file</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Tests</p></td>
+<td align="left" valign="top"><p class="table">A few unit tests</p></td>
+<td align="left" valign="top"><p class="table">Many unit tests, snort3_demo suite</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Distribution</p></td>
+<td align="left" valign="top"><p class="table">snort.org tarballs, ~6 month updates</p></td>
+<td align="left" valign="top"><p class="table">github repo, ~2 week updates</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_build_options">Build Options</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+configure --with-lib{pcap,pcre}-* → --with-{pcap,pcre}-*
+</p>
+</li>
+<li>
+<p>
+control socket, cs_dir, and users were deleted
+</p>
+</li>
+<li>
+<p>
+POLICY_BY_ID_ONLY code was deleted
+</p>
+</li>
+<li>
+<p>
+hardened --enable-inline-init-failopen / INLINE_FAILOPEN
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_command_line">Command Line</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+--pause loads config and waits for resume before processing packets
+</p>
+</li>
+<li>
+<p>
+--require-rule-sid is hardened
+</p>
+</li>
+<li>
+<p>
+--shell enables interactive Lua shell
+</p>
+</li>
+<li>
+<p>
+-T is assumed if no input given
+</p>
+</li>
+<li>
+<p>
+added --help-config prefix to dump all matching settings
+</p>
+</li>
+<li>
+<p>
+added --script-path
+</p>
+</li>
+<li>
+<p>
+added -L none|dump|pcap
+</p>
+</li>
+<li>
+<p>
+added -z &lt;#&gt; and --max-packet-threads &lt;#&gt;
+</p>
+</li>
+<li>
+<p>
+delete --enable-mpls-multicast, --enable-mpls-overlapping-ip,
+  --max-mpls-labelchain-len, --mpls-payload-type
+</p>
+</li>
+<li>
+<p>
+deleted --pid-path and --no-interface-pidfile
+</p>
+</li>
+<li>
+<p>
+deleting command line options which will be available with --lua or some such including:
+  -I, -h, -F, -p, --disable-inline-init-failopen
+</p>
+</li>
+<li>
+<p>
+hardened -n &lt; 0
+</p>
+</li>
+<li>
+<p>
+removed --search-method
+</p>
+</li>
+<li>
+<p>
+replaced "unknown args are bpf" with --bpf
+</p>
+</li>
+<li>
+<p>
+replaced --dynamic-*-lib[-dir] with --plugin-path (with : separators)
+</p>
+</li>
+<li>
+<p>
+removed -b, -N, -Z and, --perfmon-file options
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_conf_file">Conf File</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Snort 3 has a default unicode.map
+</p>
+</li>
+<li>
+<p>
+Snort 3 will not enforce an upper bound on memcaps and the like within 64 bits
+</p>
+</li>
+<li>
+<p>
+Snort 3 will supply a default *_global config if not specified
+  (Snort 2 would fatal; e.g. http_inspect_server w/o http_inspect_global)
+</p>
+</li>
+<li>
+<p>
+address list syntax changes: [[ and ]] must be [ [ and ] ] to avoid Lua string
+  parsing errors (unless in quoted string)
+</p>
+</li>
+<li>
+<p>
+because the Lua conf is live code, we lose file:line locations in app error messages
+  (syntax errors from Lua have file:line)
+</p>
+</li>
+<li>
+<p>
+changed search-method names for consistency
+</p>
+</li>
+<li>
+<p>
+delete config include_vlan_in_alerts (not used in code)
+</p>
+</li>
+<li>
+<p>
+delete config so_rule_memcap (not used in code)
+</p>
+</li>
+<li>
+<p>
+deleted --disable-attribute-table-reload-thread
+</p>
+</li>
+<li>
+<p>
+deleted config decode_*_{alerts,drops} (use rules only)
+</p>
+</li>
+<li>
+<p>
+deleted config dump-dynamic-rules-path
+</p>
+</li>
+<li>
+<p>
+deleted config ipv6_frag (not actually used)
+</p>
+</li>
+<li>
+<p>
+deleted config threshold and ips rule threshold (→ event_filter)
+</p>
+</li>
+<li>
+<p>
+eliminated ac-split; must use ac-full-q split-any-any
+</p>
+</li>
+<li>
+<p>
+frag3 → defrag, arpspoof → arp_spoof, sfportscan → port_scan,
+  perfmonitor → perf_monitor, bo → back_orifice
+</p>
+</li>
+<li>
+<p>
+limits like "1234K" are now "limit = 1234, units = <em>K</em>"
+</p>
+</li>
+<li>
+<p>
+lua field names are (lower) case sensitive; snort.conf largely wasn’t
+</p>
+</li>
+<li>
+<p>
+module filenames are not configurable: always &lt;log-dir&gt;/&lt;module-name&gt;&lt;suffix&gt;
+  (suffix is determined by module)
+</p>
+</li>
+<li>
+<p>
+no positional parameters; all name = value
+</p>
+</li>
+<li>
+<p>
+perf_monitor configuration was simplified
+</p>
+</li>
+<li>
+<p>
+portscan.detect_ack_scans deleted (exact same as include_midstream)
+</p>
+</li>
+<li>
+<p>
+removed various run modes - now just one
+</p>
+</li>
+<li>
+<p>
+frag3 default policy is Linux not bsd
+</p>
+</li>
+<li>
+<p>
+lowmem* search methods are now in snort_examples
+</p>
+</li>
+<li>
+<p>
+deleted unused http_inspect stateful mode
+</p>
+</li>
+<li>
+<p>
+deleted stateless inspection from ftp and telnet
+</p>
+</li>
+<li>
+<p>
+deleted http and ftp alert options (now strictly rule based)
+</p>
+</li>
+<li>
+<p>
+preprocessor disabled settings deleted since no longer relevant
+</p>
+</li>
+<li>
+<p>
+sessions are always created; snort config stateful checks eliminated
+</p>
+</li>
+<li>
+<p>
+stream5_tcp: prune_log_max deleted; to be replaced with histogram
+</p>
+</li>
+<li>
+<p>
+stream5_tcp: max_active_responses, min_response_seconds moved to
+  active.max_responses, min_interval
+</p>
+</li>
+<li>
+<p>
+ips policies support snort variables configured based on type,
+  ips = { variables = { nets = { var1 = expr1, … }, paths = { var2 = expr2, … }, ports = { var3 = expr3, … } } }
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_rules">Rules</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+all rules must have a sid
+</p>
+</li>
+<li>
+<p>
+sid == 0 not allowed
+</p>
+</li>
+<li>
+<p>
+deleted activate / dynamic rules
+</p>
+</li>
+<li>
+<p>
+deleted metadata engine shared
+</p>
+</li>
+<li>
+<p>
+deleted metadata: rule-flushing (with PDU flushing rule flushing can cause
+  missed attacks, the opposite of its intent)
+</p>
+</li>
+<li>
+<p>
+changed metadata:service one[, service two]; to service:one[, two];
+</p>
+</li>
+<li>
+<p>
+soid is now a non-metadata option
+</p>
+</li>
+<li>
+<p>
+metadata is now truly metadata with no impact on detection
+  (Snort doesn’t care about metadata internal structure / syntax)
+</p>
+</li>
+<li>
+<p>
+deleted fast_pattern:only; use fast_pattern, nocase
+  (option is not added to detection tree if not required)
+</p>
+</li>
+<li>
+<p>
+changed fast_pattern:&lt;offset&gt;,&lt;length&gt; to
+  fast_pattern,fast_pattern_offset &lt;offset&gt;,fast_pattern_length &lt;length&gt;
+</p>
+</li>
+<li>
+<p>
+fast pattern sensitive data with sd_pattern using hyperscan
+</p>
+</li>
+<li>
+<p>
+hyperscan regex fast patterns with regex:"&lt;regex&gt;", fast_pattern;
+</p>
+</li>
+<li>
+<p>
+no ; separated content suboptions
+</p>
+</li>
+<li>
+<p>
+offset, depth, distance, and within must use a space separator not colon
+  (e.g. offset:5; becomes offset 5;)
+</p>
+</li>
+<li>
+<p>
+content suboptions http_* are now full options
+</p>
+</li>
+<li>
+<p>
+added sticky buffers: buffer selector options must precede contents and remain
+  in effect until changed
+</p>
+</li>
+<li>
+<p>
+the following pcre options have been deleted: use sticky buffers instead
+    B, U, P, H, M, C, I, D, K, S, Y
+</p>
+</li>
+<li>
+<p>
+deleted uricontent option; use sticky buffer
+  uricontent:"foo" -→  http_uri; content:"foo"
+</p>
+</li>
+<li>
+<p>
+deleted urilen raw and norm; must use http_raw_uri and http_uri instead
+</p>
+</li>
+<li>
+<p>
+deleted unused http_encode option
+</p>
+</li>
+<li>
+<p>
+urilen replaced with generic bufferlen which applies to current sticky
+  buffer
+</p>
+</li>
+<li>
+<p>
+added optional selector to http_header, e.g. http_header:User-Agent;
+</p>
+</li>
+<li>
+<p>
+the all new http_inspect has new buffers and rule options
+</p>
+</li>
+<li>
+<p>
+added alert file and alert service rules
+  (service in body not required if there is only one and it is in header;
+  alert service / file rules disable fast pattern searching of raw packets)
+</p>
+</li>
+<li>
+<p>
+rule option sequence: &lt;stub&gt; soid &lt;hidden&gt;
+</p>
+</li>
+<li>
+<p>
+arbitrary whitespace and multiline rules w/o \n
+</p>
+</li>
+<li>
+<p>
+#begin … #end comments to easily comment out multiple lines
+</p>
+</li>
+<li>
+<p>
+add rule remarks option with rem:"arbitrary comment"
+</p>
+</li>
+<li>
+<p>
+nets and/or ports may be omitted from rule headers (matches any)
+</p>
+</li>
+<li>
+<p>
+parse all rules and output all errors before quitting
+</p>
+</li>
+<li>
+<p>
+read rules from conf, separate rules file, or stdin
+</p>
+</li>
+<li>
+<p>
+The symbol =&lt; in a byte test is recognized as a syntax error. The correct
+  symbol is &lt;=.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_output">Output</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+alert_fast includes packet data by default
+</p>
+</li>
+<li>
+<p>
+all text mode outputs default to stdout
+</p>
+</li>
+<li>
+<p>
+changed default logging mode to -L none
+</p>
+</li>
+<li>
+<p>
+deleted layer2resets and flexresp2_*
+</p>
+</li>
+<li>
+<p>
+deleted log_ascii
+</p>
+</li>
+<li>
+<p>
+general output guideline: don’t print zero counts
+</p>
+</li>
+<li>
+<p>
+Snort 3 queues decoder and inspector events to the main event queue before ips policy
+  is selected; since some events may not be enabled, the queue needs to be sized larger
+  than with Snort 2 which used an intermediate queue for decoder events.
+</p>
+</li>
+<li>
+<p>
+deleted the intermediate http and ftp_telnet event queues
+</p>
+</li>
+<li>
+<p>
+alert_unified2 and log_unified2 have been deleted
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_sensitive_data">Sensitive Data</h3>
+<div class="paragraph"><p>The Snort 2.X SDF Preprocessor is gone, replaced by ips option <code>sd_pattern</code>.
+The sd_pattern rule option is synonymous with the sd_pattern option used
+for gid:138 rules, but has a different syntax. A major difference in syntax
+is the use of Hyperscan pattern matching library which provides a regex
+language similar to PCRE.</p></div>
+<div class="paragraph"><p>To facilitate continued performance, sd_pattern rule option is implemented
+with Hyperscan pattern matching library. The rule option is now also utilized
+as a "fast pattern" in the Snort engine which provides a significant performance
+improvement over the separate detection step of earlier implementations.</p></div>
+<div class="paragraph"><p>The preprocessor alert SDF_COMBO_ALERT (139:1) has been removed and has no
+replacement in Snort 3.X. This is because the rule offered no additional
+value over gid:138 rules and was difficult to interpret the result of.</p></div>
+<div class="paragraph"><p>For more information, See Features &gt; Sensitive Data Filtering for details.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_features_not_yet_supported_by_snort_3">Features Not Yet Supported by Snort 3</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Support in http_inspect for Original Client IP is limited to the
+  X-Forwarded-For and True-Client-IP headers in that order. It is not
+  possible to configure additional custom headers to search for Original
+  Client IP.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_snort2lua">Snort2Lua</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>One of the major differences between Snort 2 and Snort 3 is the
+configuration. Snort 2 configuration files are written in Snort-specific
+syntax while Snort 3 configuration files are written in Lua. Snort2Lua is a
+program specifically designed to convert valid Snort 2 configuration files
+into Lua files that Snort 3 can understand.</p></div>
+<div class="paragraph"><p>Snort2Lua reads your legacy Snort conf file(s) and generates Snort 3 Lua
+and rules files. When running this program, the only mandatory option is to
+provide Snort2Lua with a Snort 2 configuration file. The default output
+file file is snort.lua, the default error file will be snort.rej, and the
+default rule file is the output file (default is snort.lua).  When
+Snort2Lua finishes running, the resulting configuration file can be
+successfully run as the Snort3.0 configuration file.  The sole exception to
+this rule is when Snort2Lua cannot find an included file.  If that occurs,
+the file will still be included in the output file and you will need to
+manually adjust or comment the file name. Additionally, if the exit code is
+not zero, some of the information may not be successfully converted.  Check
+the error file for all of the conversion problems.</p></div>
+<div class="paragraph"><p>Those errors can occur for a multitude of reasons and are not necessarily
+bad. Snort2Lua expects a valid Snort 2 configuration.  Therefore, if the
+configuration is invalid or has questionable syntax, Snort2Lua may fail to
+parse the configuration file or create an invalid Snort 3 configuration
+file.</p></div>
+<div class="paragraph"><p>There are a also few peculiarities of Snort2Lua that may be confusing to a
+first time user:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Aside from an initial configuration file (which is specified from the
+  command line or as the file in ‘config binding’), every file that is
+  included into Snort 3 must be either a Lua file or a rule file; the file
+  cannot contain both rules and Lua syntax.  Therefore, when parsing a file
+  specified with the ‘include’ command, Snort2Lua will output both a Lua
+  file and a rule file.
+</p>
+</li>
+<li>
+<p>
+Any line that is a comment in a configuration file will be added in to a
+  comments section at the bottom of the main configuration file.
+</p>
+</li>
+<li>
+<p>
+Rules that contain unsupported options will be converted to the best of
+  Snort2Lua’s capability and then printed as a comment in the rule file.
+</p>
+</li>
+<li>
+<p>
+Files with a <em>.rules</em> suffix are assumed to be Talos 2.X rules files and
+  converted line-by-line.  In this case, lines starting with <em>alert</em> are
+  converted as usual but lines starting with <em># alert</em> are
+  assumed to be commented out rules which are converted to 3.0 format and
+  remain comments in the output file.  All other comments are passed
+  through directly.  There is no support for other commented rule actions
+  since these do not appear in Talos rules files.
+</p>
+</li>
+</ul></div>
+<div class="sect2">
+<h3 id="_snort2lua_command_line">Snort2Lua Command Line</h3>
+<div class="paragraph"><p>By default, Snort2Lua will attempt to parse every ‘include’ file and every
+‘binding’ file.  There is an option to change this functionality.</p></div>
+<div class="paragraph"><p>When specifying a rule file with one of the command line options, Snort2Lua
+will output all of the converted rules to that specified rule file.  This
+is especially useful when you are only interesting in converting rules
+since there is no Lua syntax in rule files.  There is also an option that
+tells Snort2Lua to output every rule for a given configuration into a
+single rule file.  Similarly, there is an option pull all of the Lua syntax
+from every ‘include’ file into the output file.</p></div>
+<div class="paragraph"><p>There are currently three output modes: default, quiet, and differences.
+As expected, quiet mode produces a Snort configuration.  All errors (aside
+from Fatal Snort2Lua errors), differences, and comments will omitted from
+the final output file.  Default mode will print everything. That mean you
+will be able to see exactly what changes have occurred between Snort 2 and
+Snort 3 in addition to the new syntax, the original file’s comments, and
+all errors that have occurred.  Finally, differences mode will not actually
+output a valid Snort 3 configuration.  Instead, you can see the exact
+options from the input configuration that have changed.</p></div>
+<div class="sect3">
+<h4 id="_usage_snort2lua_options_8230_c_lt_snort_conf_gt_8230">Usage: snort2lua [OPTIONS]… -c &lt;snort_conf&gt; …</h4>
+<div class="paragraph"><p>Converts the Snort configuration file specified by the -c or --conf-file
+options into a Snort++ configuration file</p></div>
+<div class="sect4">
+<h5 id="_options">Options:</h5>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>-?</strong>                show usage
+</p>
+</li>
+<li>
+<p>
+<strong>-h</strong>                this overview of snort2lua
+</p>
+</li>
+<li>
+<p>
+<strong>-a</strong>                default option.  print all data
+</p>
+</li>
+<li>
+<p>
+<strong>-c &lt;snort_conf&gt;</strong>   The Snort &lt;snort_conf&gt; file to convert
+</p>
+</li>
+<li>
+<p>
+<strong>-d</strong>                print the differences, and only the differences, between the
+                    Snort and Snort++ configurations to the &lt;out_file&gt;
+</p>
+</li>
+<li>
+<p>
+<strong>-e &lt;error_file&gt;</strong>   output all errors to &lt;error_file&gt;
+</p>
+</li>
+<li>
+<p>
+<strong>-i</strong>                if &lt;snort_conf&gt; file contains any &lt;include_file&gt; or
+                    &lt;policy_file&gt; (i.e. <em>include path/to/conf/other_conf</em>), do
+                    NOT parse those files
+</p>
+</li>
+<li>
+<p>
+<strong>-m</strong>                add a remark to the end of every converted rule
+</p>
+</li>
+<li>
+<p>
+<strong>-o &lt;out_file&gt;</strong>     output the new Snort++ lua configuration to &lt;out_file&gt;
+</p>
+</li>
+<li>
+<p>
+<strong>-q</strong>                quiet mode. Only output valid configuration information to
+                    the &lt;out_file&gt;
+</p>
+</li>
+<li>
+<p>
+<strong>-r &lt;rule_file&gt;</strong>    output any converted rule to &lt;rule_file&gt;
+</p>
+</li>
+<li>
+<p>
+<strong>-s</strong>                when parsing &lt;include_file&gt;, write &lt;include_file&gt;'s rules to
+                    &lt;rule_file&gt;. Meaningless if <em>-i</em> provided
+</p>
+</li>
+<li>
+<p>
+<strong>-t</strong>                when parsing &lt;include_file&gt;, write &lt;include_file&gt;'s
+                    information, excluding rules, to &lt;out_file&gt;. Meaningless if
+                    <em>-i</em> provided
+</p>
+</li>
+<li>
+<p>
+<strong>-V</strong>                Print the current Snort2Lua version
+</p>
+</li>
+<li>
+<p>
+<strong>--bind-wizard</strong>     Add default wizard to bindings
+</p>
+</li>
+<li>
+<p>
+<strong>--bind-port</strong>       Convert port bindings
+</p>
+</li>
+<li>
+<p>
+<strong>--conf-file</strong>       Same as <em>-c</em>. A Snort &lt;snort_conf&gt; file which will be
+                    converted
+</p>
+</li>
+<li>
+<p>
+<strong>--dont-parse-includes</strong>
+                    Same as <em>-p</em>. if &lt;snort_conf&gt; file contains any
+                    &lt;include_file&gt; or &lt;policy_file&gt; (i.e. <em>include
+                    path/to/conf/other_conf</em>), do NOT parse those files
+</p>
+</li>
+<li>
+<p>
+<strong>--dont-convert-max-sessions</strong>
+                    do not convert max_tcp, max_udp, max_icmp, max_ip to
+                    max_session
+</p>
+</li>
+<li>
+<p>
+<strong>--error-file=&lt;error_file&gt;</strong>
+                    Same as <em>-e</em>. output all errors to &lt;error_file&gt;
+</p>
+</li>
+<li>
+<p>
+<strong>--help</strong>            Same as <em>-h</em>. this overview of snort2lua
+</p>
+</li>
+<li>
+<p>
+<strong>--ips-policy-pattern</strong>  Convert config bindings matching this path to ips policy
+                    bindings
+</p>
+</li>
+<li>
+<p>
+<strong>--markup</strong>          print help in asciidoc compatible format
+</p>
+</li>
+<li>
+<p>
+<strong>--output-file=&lt;out_file&gt;</strong>
+                    Same as <em>-o</em>. output the new Snort++ lua configuration to
+                    &lt;out_file&gt;
+</p>
+</li>
+<li>
+<p>
+<strong>--print-all</strong>       Same as <em>-a</em>. default option.  print all data
+</p>
+</li>
+<li>
+<p>
+<strong>--print-differences</strong>  Same as <em>-d</em>. output the differences, and only the
+                    differences, between the Snort and Snort++ configurations to
+                    the &lt;out_file&gt;
+</p>
+</li>
+<li>
+<p>
+<strong>--quiet</strong>           Same as <em>-q</em>. quiet mode. Only output valid configuration
+                    information to the &lt;out_file&gt;
+</p>
+</li>
+<li>
+<p>
+<strong>--remark</strong>          same as <em>-m</em>.  add a remark to the end of every converted
+                    rule
+</p>
+</li>
+<li>
+<p>
+<strong>--rule-file=&lt;rule_file&gt;</strong>
+                    Same as <em>-r</em>. output any converted rule to &lt;rule_file&gt;
+</p>
+</li>
+<li>
+<p>
+<strong>--single-conf-file</strong>  Same as <em>-t</em>. when parsing &lt;include_file&gt;, write
+                    &lt;include_file&gt;'s information, excluding rules, to
+                    &lt;out_file&gt;
+</p>
+</li>
+<li>
+<p>
+<strong>--single-rule-file</strong>  Same as <em>-s</em>. when parsing &lt;include_file&gt;, write
+                    &lt;include_file&gt;'s rules to &lt;rule_file&gt;.
+</p>
+</li>
+<li>
+<p>
+<strong>--version</strong>         Same as <em>-V</em>. Print the current Snort2Lua version
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect4">
+<h5 id="_required_option">Required option:</h5>
+<div class="ulist"><ul>
+<li>
+<p>
+A Snort configuration file to convert. Set with either <em>-c</em> or <em>--conf-file</em>
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect4">
+<h5 id="_default_values">Default values:</h5>
+<div class="ulist"><ul>
+<li>
+<p>
+&lt;out_file&gt;   =  snort.lua
+</p>
+</li>
+<li>
+<p>
+&lt;rule_file&gt;  =  &lt;out_file&gt; = snort.lua.  Rules are written to the <em>local_rules</em> variable in the &lt;out_file&gt;
+</p>
+</li>
+<li>
+<p>
+&lt;error_file&gt; =  snort.rej.  This file will not be created in quiet mode.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_known_problems">Known Problems</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Any Snort 2 ‘string’ which is dependent on a variable will no longer
+   have that variable in the Lua string.
+</p>
+</li>
+<li>
+<p>
+Snort2Lua currently does not handle variables well. First, that means
+   variables will not always be parsed correctly.  Second, sometimes a
+   variables value will be output in the lua file rather than a variable
+   For instance, if Snort2Lua attempted to convert the line <em>include
+   $RULE_PATH/example.rule</em>, the output may output <em>include
+   /etc/rules/example.rule</em> instead.
+</p>
+</li>
+<li>
+<p>
+When Snort2Lua parses a ‘binding’ configuration file, the rules and
+   configuration will automatically be combined into the same file.  Also,
+   the new files name will automatically become the old file’s name with a
+   .lua extension.  There is currently no way to specify or change that
+   files name.
+</p>
+</li>
+<li>
+<p>
+If a rule’s action is a custom ruletype, that rule action will be
+   silently converted to the rule’s <em>type</em>. No warnings or errors are
+   currently emitted. Additionally, the custom ruletypes outputs will be
+   silently discarded.
+</p>
+</li>
+<li>
+<p>
+If the original configuration contains a binding that points to another
+   file and the binding file contains an error, Snort2Lua will output the
+   number of rejects for the binding file in addition to the number of
+   rejects in the main file.  The two numbers will eventually be combined
+   into one output.
+</p>
+</li>
+<li>
+<p>
+If the original configuration contains a replace rule with alert action,
+   Snort2Lua won’t translate the rule from alert to rewrite action. It will
+   keep the action as alert, which does not actually replace the content in
+   Snort 3. To replace content, the rule action needs to be rewrite, which
+   can be added manually or by tooling.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_usage">Usage</h3>
+<div class="paragraph"><p>Snort2Lua is included in the Snort 3 distribution. The Snort2Lua source
+code is located in the tools/snort2lua directory. The program is
+automatically built and installed.</p></div>
+<div class="paragraph"><p>Translating your configuration</p></div>
+<div class="paragraph"><p>To run Snort2Lua, the only requirement is a file containing Snort 2 syntax.
+Assuming your configuration file is named snort.conf, run the command</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>snort2lua –c snort.conf</code></pre>
+</div></div>
+<div class="paragraph"><p>Snort2Lua will output a file named snort.lua. Assuming your snort.conf file
+is a valid Snort 2 configuration file, than the resulting snort.lua file
+will always be a valid Snort 3 configuration file; any errors that occur
+are because Snort 3 currently does not support all of the Snort 2 options.</p></div>
+<div class="paragraph"><p>Every keyword from the Snort configuration can be found in the output file.
+If the option or keyword has changed, then a comment containing both the
+option or keyword’s old name and new name will be present in the output
+file.</p></div>
+<div class="paragraph"><p>Translating a rule file</p></div>
+<div class="paragraph"><p>Snort2Lua can also accommodate translating individual rule files. Assuming
+the Snort 2 rule file is named snort.rules and you want the new rule file
+to be name updated.rules, run the command</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>snort2lua –c snort.rules -r updated.rules</code></pre>
+</div></div>
+<div class="paragraph"><p>Snort2Lua will output a file named updated.rules. That file, updated.rules,
+will always be a valid Snort 3 rule file. Any rule that contains
+unsupported options will be a comment in the output file.</p></div>
+<div class="paragraph"><p>Understanding the Output</p></div>
+<div class="paragraph"><p>Although Snort2Lua outputs very little to the console, there are several
+things that occur when Snort2Lua runs.  This is a list of Snort2Lua
+outputs.</p></div>
+<div class="paragraph"><p><em>The console</em>.   Every line that Snort2Lua is unable to translate from the
+Snort 2.X format to the Snort 3 format is considered an error. Upon
+exiting, Snort2Lua will print the number of errors that occurred. Snort2Lua
+will also print the name of the error file.</p></div>
+<div class="paragraph"><p><em>The output file</em>.  As previously mentioned, Snort2Lua will create a Lua
+file with valid Snort 3 syntax.  The default Lua file is named snort.lua.
+This file is the equivalent of your main Snort 2 configuration file.</p></div>
+<div class="paragraph"><p><em>The rule file</em>.   By default, all rules will be printed to the Lua file.
+However, if a rule file is specified on the command line, any rules found
+in the Snort 2 configuration will be written to the rule file instead</p></div>
+<div class="paragraph"><p><em>The error file</em>.  By default, the error file is snort.rej. It will only be
+created if errors exist.  Every error referenced on the command line can be
+found in this file.  There are two reasons an error can occur.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The Snort 2 configuration file has invalid syntax. If Snort 2 cannot
+  parse the configuration file, neither can Snort2Lua.  In the example below,
+  Snort2Lua could not convert the line <em>config bad_option</em>.  Since that is not
+  valid Snort 2 syntax, this is a syntax error.
+</p>
+</li>
+<li>
+<p>
+The Snort 2 configuration file contains preprocessors and rule options
+  that are not supported in Snort 3.  If Snort 2 can parse a line that
+  Snort2Lua cannot parse, than Snort 3 does not support something in the line.
+  As Snort 3 begins supporting these preprocessors and rule options, Snort2Lua
+  will also begin translating these lines. One example of such an error is
+  dcerpc2.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Additional .lua and .rules files. Every time Snort2Lua parses the include
+or binding keyword, the program will attempt to parse the file referenced
+by the keyword.  Snort2Lua will then create one or two new files.  The new
+files will have a .lua or .rules extension appended to the original
+filename.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration_changes">Configuration Changes</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><code>change -&gt; attribute_table: 'STREAM_POLICY' ==&gt; 'hosts: tcp_policy'
+change -&gt; attribute_table: 'filename &lt;file_name&gt;' ==&gt; 'hosts[]'
+change -&gt; config 'addressspace_agnostic'  ==&gt; 'packets.address_space_agnostic'
+change -&gt; config 'checksum_mode'  ==&gt; 'network.checksum_eval'
+change -&gt; config 'daq_dir'  ==&gt; 'daq.module_dirs'
+change -&gt; config 'detection_filter'  ==&gt; 'alerts.detection_filter_memcap'
+change -&gt; config 'enable_deep_teredo_inspection'  ==&gt; 'udp.deep_teredo_inspection'
+change -&gt; config 'enable_mpls_overlapping_ip'  ==&gt; 'packets.mpls_agnostic'
+change -&gt; config 'event_filter'  ==&gt; 'alerts.event_filter_memcap'
+change -&gt; config 'max_attribute_hosts'  ==&gt; 'attribute_table.max_hosts'
+change -&gt; config 'max_attribute_services_per_host'  ==&gt; 'attribute_table.max_services_per_host'
+change -&gt; config 'nopcre'  ==&gt; 'detection.pcre_enable'
+change -&gt; config 'pkt_count'  ==&gt; 'packets.limit'
+change -&gt; config 'rate_filter'  ==&gt; 'alerts.rate_filter_memcap'
+change -&gt; config 'react'  ==&gt; 'react.page'
+change -&gt; config 'threshold'  ==&gt; 'alerts.event_filter_memcap'
+change -&gt; converter: 'gen_id' ==&gt; 'gid'
+change -&gt; converter: 'sid_id' ==&gt; 'sid'
+change -&gt; csv: 'csv' ==&gt; 'fields'
+change -&gt; csv: 'dgmlen' ==&gt; 'pkt_len'
+change -&gt; csv: 'dst' ==&gt; 'dst_addr'
+change -&gt; csv: 'dstport' ==&gt; 'dst_port'
+change -&gt; csv: 'ethdst' ==&gt; 'eth_dst'
+change -&gt; csv: 'ethlen' ==&gt; 'eth_len'
+change -&gt; csv: 'ethsrc' ==&gt; 'eth_src'
+change -&gt; csv: 'ethtype' ==&gt; 'eth_type'
+change -&gt; csv: 'icmpcode' ==&gt; 'icmp_code'
+change -&gt; csv: 'icmpid' ==&gt; 'icmp_id'
+change -&gt; csv: 'icmpseq' ==&gt; 'icmp_seq'
+change -&gt; csv: 'icmptype' ==&gt; 'icmp_type'
+change -&gt; csv: 'id' ==&gt; 'ip_id'
+change -&gt; csv: 'iplen' ==&gt; 'ip_len'
+change -&gt; csv: 'sig_generator' ==&gt; 'gid'
+change -&gt; csv: 'sig_id' ==&gt; 'sid'
+change -&gt; csv: 'sig_rev' ==&gt; 'rev'
+change -&gt; csv: 'src' ==&gt; 'src_addr'
+change -&gt; csv: 'srcport' ==&gt; 'src_port'
+change -&gt; csv: 'tcpack' ==&gt; 'tcp_ack'
+change -&gt; csv: 'tcpflags' ==&gt; 'tcp_flags'
+change -&gt; csv: 'tcplen' ==&gt; 'tcp_len'
+change -&gt; csv: 'tcpseq' ==&gt; 'tcp_seq'
+change -&gt; csv: 'tcpwindow' ==&gt; 'tcp_win'
+change -&gt; csv: 'udplength' ==&gt; 'udp_len'
+change -&gt; daq: 'config daq:' ==&gt; 'name'
+change -&gt; daq_mode: 'config daq_mode:' ==&gt; 'mode'
+change -&gt; daq_var: 'config daq_var:' ==&gt; 'variables'
+change -&gt; detection: 'ac' ==&gt; 'ac_full'
+change -&gt; detection: 'ac-banded' ==&gt; 'ac_full'
+change -&gt; detection: 'ac-bnfa' ==&gt; 'ac_bnfa'
+change -&gt; detection: 'ac-bnfa-nq' ==&gt; 'ac_bnfa'
+change -&gt; detection: 'ac-bnfa-q' ==&gt; 'ac_bnfa'
+change -&gt; detection: 'ac-nq' ==&gt; 'ac_full'
+change -&gt; detection: 'ac-q' ==&gt; 'ac_full'
+change -&gt; detection: 'ac-sparsebands' ==&gt; 'ac_full'
+change -&gt; detection: 'ac-split' ==&gt; 'ac_full'
+change -&gt; detection: 'ac-split' ==&gt; 'split_any_any'
+change -&gt; detection: 'ac-std' ==&gt; 'ac_full'
+change -&gt; detection: 'acs' ==&gt; 'ac_full'
+change -&gt; detection: 'bleedover-port-limit' ==&gt; 'bleedover_port_limit'
+change -&gt; detection: 'debug-print-fast-pattern' ==&gt; 'show_fast_patterns'
+change -&gt; detection: 'intel-cpm' ==&gt; 'hyperscan'
+change -&gt; detection: 'lowmem-nq' ==&gt; 'lowmem'
+change -&gt; detection: 'lowmem-q' ==&gt; 'lowmem'
+change -&gt; detection: 'max-pattern-len' ==&gt; 'max_pattern_len'
+change -&gt; detection: 'no_stream_inserts' ==&gt; 'detect_raw_tcp'
+change -&gt; detection: 'search-method' ==&gt; 'search_method'
+change -&gt; detection: 'split-any-any' ==&gt; 'split_any_any = true by default'
+change -&gt; detection: 'split-any-any' ==&gt; 'split_any_any'
+change -&gt; dnp3: 'ports' ==&gt; 'bindings'
+change -&gt; dns: 'ports' ==&gt; 'bindings'
+change -&gt; dynamicdetection ==&gt; 'snort.--plugin_path=&lt;path&gt;'
+change -&gt; dynamicengine ==&gt; 'snort.--plugin_path=&lt;path&gt;'
+change -&gt; dynamicpreprocessor ==&gt; 'snort.--plugin_path=&lt;path&gt;'
+change -&gt; dynamicsidechannel ==&gt; 'snort.--plugin_path=&lt;path&gt;'
+change -&gt; event_filter: 'gen_id' ==&gt; 'gid'
+change -&gt; event_filter: 'sig_id' ==&gt; 'sid'
+change -&gt; event_filter: 'threshold' ==&gt; 'event_filter'
+change -&gt; file: 'config file: file_block_timeout' ==&gt; 'block_timeout'
+change -&gt; file: 'config file: file_capture_block_size' ==&gt; 'capture_block_size'
+change -&gt; file: 'config file: file_capture_max' ==&gt; 'capture_max_size'
+change -&gt; file: 'config file: file_capture_memcap' ==&gt; 'capture_memcap'
+change -&gt; file: 'config file: file_capture_min' ==&gt; 'capture_min_size'
+change -&gt; file: 'config file: file_type_depth' ==&gt; 'type_depth'
+change -&gt; file: 'config file: signature' ==&gt; 'enable_signature'
+change -&gt; file: 'config file: type_id' ==&gt; 'enable_type'
+change -&gt; file: 'ver' ==&gt; 'version'
+change -&gt; frag3_engine: 'min_fragment_length' ==&gt; 'min_frag_length'
+change -&gt; frag3_engine: 'overlap_limit' ==&gt; 'max_overlaps'
+change -&gt; frag3_engine: 'policy bsd-right' ==&gt; 'policy = bsd_right'
+change -&gt; frag3_engine: 'timeout' ==&gt; 'session_timeout'
+change -&gt; ftp_telnet_protocol: 'alt_max_param_len' ==&gt; 'cmd_validity'
+change -&gt; ftp_telnet_protocol: 'data_chan' ==&gt; 'ignore_data_chan'
+change -&gt; ftp_telnet_protocol: 'ports' ==&gt; 'bindings'
+change -&gt; gtp: 'ports' ==&gt; 'bindings'
+change -&gt; http_inspect_server: 'bare_byte' ==&gt; 'utf8_bare_byte'
+change -&gt; http_inspect_server: 'client_flow_depth' ==&gt; 'request_depth'
+change -&gt; http_inspect_server: 'double_decode' ==&gt; 'iis_double_decode'
+change -&gt; http_inspect_server: 'http_inspect_server' ==&gt; 'http_inspect'
+change -&gt; http_inspect_server: 'iis_backslash' ==&gt; 'backslash_to_slash'
+change -&gt; http_inspect_server: 'inspect_gzip' ==&gt; 'unzip'
+change -&gt; http_inspect_server: 'non_rfc_char' ==&gt; 'bad_characters'
+change -&gt; http_inspect_server: 'ports' ==&gt; 'bindings'
+change -&gt; http_inspect_server: 'u_encode' ==&gt; 'percent_u'
+change -&gt; http_inspect_server: 'utf_8' ==&gt; 'utf8'
+change -&gt; imap: 'ports' ==&gt; 'bindings'
+change -&gt; modbus: 'ports' ==&gt; 'bindings'
+change -&gt; na_policy_mode: 'na_policy_mode' ==&gt; 'mode'
+change -&gt; paf_max: 'paf_max [0:63780]' ==&gt; 'max_pdu [1460:32768]'
+change -&gt; perfmonitor: 'console' ==&gt; 'format = 'text''
+change -&gt; perfmonitor: 'console' ==&gt; 'output = 'console''
+change -&gt; perfmonitor: 'file' ==&gt; 'format = 'csv''
+change -&gt; perfmonitor: 'file' ==&gt; 'output = 'file''
+change -&gt; perfmonitor: 'flow-file' ==&gt; 'format = 'csv''
+change -&gt; perfmonitor: 'flow-file' ==&gt; 'output = 'file''
+change -&gt; perfmonitor: 'flow-ip' ==&gt; 'flow_ip'
+change -&gt; perfmonitor: 'flow-ip-file' ==&gt; 'format = 'csv''
+change -&gt; perfmonitor: 'flow-ip-file' ==&gt; 'output = 'file''
+change -&gt; perfmonitor: 'flow-ip-memcap' ==&gt; 'flow_ip_memcap'
+change -&gt; perfmonitor: 'flow-ports' ==&gt; 'flow_ports'
+change -&gt; perfmonitor: 'pktcnt' ==&gt; 'packets'
+change -&gt; perfmonitor: 'snortfile' ==&gt; 'format = 'csv''
+change -&gt; perfmonitor: 'snortfile' ==&gt; 'output = 'file''
+change -&gt; perfmonitor: 'time' ==&gt; 'seconds'
+change -&gt; policy_mode: 'inline_test' ==&gt; 'inline-test'
+change -&gt; pop: 'ports' ==&gt; 'bindings'
+change -&gt; ppm: 'fastpath-expensive-packets' ==&gt; 'packet.fastpath'
+change -&gt; ppm: 'max-pkt-time' ==&gt; 'packet.max_time'
+change -&gt; ppm: 'max-rule-time' ==&gt; 'rule.max_time'
+change -&gt; ppm: 'ppm' ==&gt; 'latency'
+change -&gt; ppm: 'suspend-expensive-rules' ==&gt; 'rule.suspend'
+change -&gt; ppm: 'suspend-timeout' ==&gt; 'max_suspend_time'
+change -&gt; ppm: 'threshold' ==&gt; 'rule.suspend_threshold'
+change -&gt; preprocessor 'normalize_icmp4' ==&gt; 'normalize.icmp4'
+change -&gt; preprocessor 'normalize_icmp6' ==&gt; 'normalize.icmp6'
+change -&gt; preprocessor 'normalize_ip6' ==&gt; 'normalize.ip6'
+change -&gt; profile: 'print' ==&gt; 'count'
+change -&gt; profile: 'sort avg_ticks' ==&gt; 'sort = avg_check'
+change -&gt; profile: 'sort total_ticks' ==&gt; 'sort = total_time'
+change -&gt; rate_filter: 'gen_id' ==&gt; 'gid'
+change -&gt; rate_filter: 'sig_id' ==&gt; 'sid'
+change -&gt; reputation: 'shared_mem' ==&gt; 'list_dir'
+change -&gt; sfportscan: 'proto' ==&gt; 'protos'
+change -&gt; sfportscan: 'scan_type' ==&gt; 'scan_types'
+change -&gt; sip: 'max_requestName_len' ==&gt; 'max_request_name_len'
+change -&gt; sip: 'ports' ==&gt; 'bindings'
+change -&gt; smtp: 'ports' ==&gt; 'bindings'
+change -&gt; ssh: 'server_ports' ==&gt; 'bindings'
+change -&gt; ssl: 'ports' ==&gt; 'bindings'
+change -&gt; stream5_global: 'max_active_responses' ==&gt; 'max_responses'
+change -&gt; stream5_global: 'min_response_seconds' ==&gt; 'min_interval'
+change -&gt; stream5_global: 'tcp_cache_nominal_timeout' ==&gt; 'idle_timeout'
+change -&gt; stream5_global: 'udp_cache_nominal_timeout' ==&gt; 'idle_timeout'
+change -&gt; stream5_ha: 'min_session_lifetime' ==&gt; 'min_age'
+change -&gt; stream5_ha: 'min_sync_interval' ==&gt; 'min_sync'
+change -&gt; stream5_ha: 'stream5_ha' ==&gt; 'high_availability'
+change -&gt; stream5_ha: 'use_daq' ==&gt; 'daq_channel'
+change -&gt; stream5_ip: 'timeout' ==&gt; 'session_timeout'
+change -&gt; stream5_tcp: 'bind_to' ==&gt; 'bindings'
+change -&gt; stream5_tcp: 'dont_reassemble_async' ==&gt; 'reassemble_async'
+change -&gt; stream5_tcp: 'max_queued_bytes' ==&gt; 'queue_limit.max_bytes'
+change -&gt; stream5_tcp: 'max_queued_segs' ==&gt; 'queue_limit.max_segments'
+change -&gt; stream5_tcp: 'policy hpux' ==&gt; 'stream_tcp.policy = hpux11'
+change -&gt; stream5_tcp: 'timeout' ==&gt; 'session_timeout'
+change -&gt; stream5_udp: 'timeout' ==&gt; 'session_timeout'
+change -&gt; suppress: 'gen_id' ==&gt; 'gid'
+change -&gt; suppress: 'sig_id' ==&gt; 'sid'
+change -&gt; syslog: 'log_alert' ==&gt; 'level = alert'
+change -&gt; syslog: 'log_auth' ==&gt; 'facility = auth'
+change -&gt; syslog: 'log_authpriv' ==&gt; 'facility = authpriv'
+change -&gt; syslog: 'log_cons' ==&gt; 'options = cons'
+change -&gt; syslog: 'log_crit' ==&gt; 'level = crit'
+change -&gt; syslog: 'log_daemon' ==&gt; 'facility = daemon'
+change -&gt; syslog: 'log_debug' ==&gt; 'level = debug'
+change -&gt; syslog: 'log_emerg' ==&gt; 'level = emerg'
+change -&gt; syslog: 'log_err' ==&gt; 'level = err'
+change -&gt; syslog: 'log_info' ==&gt; 'level = info'
+change -&gt; syslog: 'log_local0' ==&gt; 'facility = local0'
+change -&gt; syslog: 'log_local1' ==&gt; 'facility = local1'
+change -&gt; syslog: 'log_local2' ==&gt; 'facility = local2'
+change -&gt; syslog: 'log_local3' ==&gt; 'facility = local3'
+change -&gt; syslog: 'log_local4' ==&gt; 'facility = local4'
+change -&gt; syslog: 'log_local5' ==&gt; 'facility = local5'
+change -&gt; syslog: 'log_local6' ==&gt; 'facility = local6'
+change -&gt; syslog: 'log_local7' ==&gt; 'facility = local7'
+change -&gt; syslog: 'log_ndelay' ==&gt; 'options = ndelay'
+change -&gt; syslog: 'log_notice' ==&gt; 'level = notice'
+change -&gt; syslog: 'log_perror' ==&gt; 'options = perror'
+change -&gt; syslog: 'log_pid' ==&gt; 'options = pid'
+change -&gt; syslog: 'log_user' ==&gt; 'facility = user'
+change -&gt; syslog: 'log_warning' ==&gt; 'level = warning'
+change -&gt; threshold: 'ips_option: threshold' ==&gt; 'event_filter'
+change -&gt; unified2: 'alert_unified2' ==&gt; 'unified2'
+change -&gt; unified2: 'log_unified2' ==&gt; 'unified2'
+change -&gt; unified2: 'unified2' ==&gt; 'unified2'
+deleted -&gt; arpspoof: 'unicast'
+deleted -&gt; attribute_table: '&lt;FRAG_POLICY&gt;hpux&lt;/FRAG_POLICY&gt;'
+deleted -&gt; attribute_table: '&lt;FRAG_POLICY&gt;irix&lt;/FRAG_POLICY&gt;'
+deleted -&gt; attribute_table: '&lt;FRAG_POLICY&gt;old-linux&lt;/FRAG_POLICY&gt;'
+deleted -&gt; attribute_table: '&lt;FRAG_POLICY&gt;unknown&lt;/FRAG_POLICY&gt;'
+deleted -&gt; attribute_table: '&lt;STREAM_POLICY&gt;noack&lt;/STREAM_POLICY&gt;'
+deleted -&gt; attribute_table: '&lt;STREAM_POLICY&gt;unknown&lt;/STREAM_POLICY&gt;'
+deleted -&gt; config 'cs_dir'
+deleted -&gt; config 'decode_data_link'
+deleted -&gt; config 'disable_attribute_reload_thread'
+deleted -&gt; config 'disable_decode_alerts'
+deleted -&gt; config 'disable_decode_drops'
+deleted -&gt; config 'disable_inline_init_failopen'
+deleted -&gt; config 'disable_ipopt_alerts'
+deleted -&gt; config 'disable_ipopt_drops'
+deleted -&gt; config 'disable_replace'
+deleted -&gt; config 'disable_tcpopt_alerts'
+deleted -&gt; config 'disable_tcpopt_drops'
+deleted -&gt; config 'disable_tcpopt_experimental_alerts'
+deleted -&gt; config 'disable_tcpopt_experimental_drops'
+deleted -&gt; config 'disable_tcpopt_obsolete_alerts'
+deleted -&gt; config 'disable_tcpopt_obsolete_drops'
+deleted -&gt; config 'disable_tcpopt_ttcp_alerts'
+deleted -&gt; config 'disable_ttcp_alerts'
+deleted -&gt; config 'disable_ttcp_drops'
+deleted -&gt; config 'dump_dynamic_rules_path'
+deleted -&gt; config 'dynamicoutput'
+deleted -&gt; config 'enable_decode_drops'
+deleted -&gt; config 'enable_decode_oversized_alerts'
+deleted -&gt; config 'enable_decode_oversized_drops'
+deleted -&gt; config 'enable_gtp'
+deleted -&gt; config 'enable_ipopt_drops'
+deleted -&gt; config 'enable_mpls_multicast'
+deleted -&gt; config 'enable_tcpopt_drops'
+deleted -&gt; config 'enable_tcpopt_experimental_drops'
+deleted -&gt; config 'enable_tcpopt_obsolete_drops'
+deleted -&gt; config 'enable_tcpopt_ttcp_drops'
+deleted -&gt; config 'enable_ttcp_drops'
+deleted -&gt; config 'flexresp2_attempts'
+deleted -&gt; config 'flexresp2_interface'
+deleted -&gt; config 'flexresp2_memcap'
+deleted -&gt; config 'flexresp2_rows'
+deleted -&gt; config 'flowbits_size'
+deleted -&gt; config 'include_vlan_in_alerts'
+deleted -&gt; config 'interface'
+deleted -&gt; config 'layer2resets'
+deleted -&gt; config 'log_ipv6_extra_data'
+deleted -&gt; config 'no_promisc'
+deleted -&gt; config 'nolog'
+deleted -&gt; config 'protected_content'
+deleted -&gt; config 'sfalert_unified2'
+deleted -&gt; config 'sflog_unified2'
+deleted -&gt; config 'sidechannel'
+deleted -&gt; config 'so_rule_memcap'
+deleted -&gt; config 'stateful'
+deleted -&gt; csv: '&lt;filename&gt; can no longer be specific'
+deleted -&gt; csv: 'default'
+deleted -&gt; csv: 'trheader'
+deleted -&gt; detection: 'mwm'
+deleted -&gt; detection: 'search-optimize is always true'
+deleted -&gt; dnp3: 'disabled'
+deleted -&gt; dnp3: 'memcap'
+deleted -&gt; dns: 'enable_experimental_types'
+deleted -&gt; dns: 'enable_obsolete_types'
+deleted -&gt; dns: 'enable_rdata_overflow'
+deleted -&gt; event_trace: 'file'
+deleted -&gt; fast: '&lt;filename&gt; can no longer be specific'
+deleted -&gt; frag3_engine: 'detect_anomalies'
+deleted -&gt; frag3_global: 'disabled'
+deleted -&gt; ftp_telnet_protocol: 'detect_anomalies'
+deleted -&gt; full: '&lt;filename&gt; can no longer be specific'
+deleted -&gt; http_inspect: 'detect_anomalous_servers'
+deleted -&gt; http_inspect: 'disabled'
+deleted -&gt; http_inspect: 'fast_blocking'
+deleted -&gt; http_inspect: 'normalize_random_nulls_in_text'
+deleted -&gt; http_inspect: 'proxy_alert'
+deleted -&gt; http_inspect_server: 'allow_proxy_use'
+deleted -&gt; http_inspect_server: 'enable_cookie'
+deleted -&gt; http_inspect_server: 'enable_xff'
+deleted -&gt; http_inspect_server: 'extended_ascii_uri'
+deleted -&gt; http_inspect_server: 'extended_response_inspection'
+deleted -&gt; http_inspect_server: 'iis_unicode_map not allowed in sever'
+deleted -&gt; http_inspect_server: 'inspect_uri_only'
+deleted -&gt; http_inspect_server: 'log_hostname'
+deleted -&gt; http_inspect_server: 'log_uri'
+deleted -&gt; http_inspect_server: 'no_alerts'
+deleted -&gt; http_inspect_server: 'no_pipeline_req'
+deleted -&gt; http_inspect_server: 'non_strict'
+deleted -&gt; http_inspect_server: 'normalize_cookies'
+deleted -&gt; http_inspect_server: 'normalize_headers'
+deleted -&gt; http_inspect_server: 'small_chunk_length'
+deleted -&gt; http_inspect_server: 'tab_uri_delimiter'
+deleted -&gt; http_inspect_server: 'unlimited_decompress'
+deleted -&gt; imap: 'disabled'
+deleted -&gt; imap: 'max_mime_mem'
+deleted -&gt; imap: 'memcap'
+deleted -&gt; perfmonitor: 'accumulate'
+deleted -&gt; perfmonitor: 'atexitonly'
+deleted -&gt; perfmonitor: 'atexitonly: base-stats'
+deleted -&gt; perfmonitor: 'atexitonly: events-stats'
+deleted -&gt; perfmonitor: 'atexitonly: flow-ip-stats'
+deleted -&gt; perfmonitor: 'atexitonly: flow-stats'
+deleted -&gt; perfmonitor: 'atexitonly: reset'
+deleted -&gt; perfmonitor: 'events'
+deleted -&gt; perfmonitor: 'max'
+deleted -&gt; pop: 'disabled'
+deleted -&gt; pop: 'max_mime_mem'
+deleted -&gt; pop: 'memcap'
+deleted -&gt; ppm: 'debug-pkts'
+deleted -&gt; reputation: 'shared_max_instances'
+deleted -&gt; reputation: 'shared_refresh'
+deleted -&gt; rpc_decode: 'alert_fragments'
+deleted -&gt; rpc_decode: 'no_alert_incomplete'
+deleted -&gt; rpc_decode: 'no_alert_large_fragments'
+deleted -&gt; rpc_decode: 'no_alert_multiple_requests'
+deleted -&gt; rule_state: 'action'
+deleted -&gt; rule_state: 'enable'
+deleted -&gt; sfportscan: 'detect_ack_scans'
+deleted -&gt; sfportscan: 'disabled'
+deleted -&gt; sfportscan: 'logfile'
+deleted -&gt; sfportscan: 'sense_level'
+deleted -&gt; sip: 'disabled'
+deleted -&gt; sip: 'max_sessions'
+deleted -&gt; smtp: 'alert_unknown_cmds'
+deleted -&gt; smtp: 'disabled'
+deleted -&gt; smtp: 'enable_mime_decoding'
+deleted -&gt; smtp: 'inspection_type'
+deleted -&gt; smtp: 'max_mime_depth'
+deleted -&gt; smtp: 'max_mime_mem'
+deleted -&gt; smtp: 'memcap'
+deleted -&gt; smtp: 'no_alerts'
+deleted -&gt; smtp: 'print_cmds'
+deleted -&gt; ssh: 'autodetect'
+deleted -&gt; ssh: 'enable_badmsgdir'
+deleted -&gt; ssh: 'enable_paysize'
+deleted -&gt; ssh: 'enable_protomismatch'
+deleted -&gt; ssh: 'enable_recognition'
+deleted -&gt; ssh: 'enable_respoverflow'
+deleted -&gt; ssh: 'enable_srvoverflow'
+deleted -&gt; ssh: 'enable_ssh1crc32'
+deleted -&gt; ssl: 'noinspect_encrypted'
+deleted -&gt; stream5_global: 'disabled'
+deleted -&gt; stream5_global: 'flush_on_alert'
+deleted -&gt; stream5_global: 'memcap'
+deleted -&gt; stream5_global: 'no_midstream_drop_alerts'
+deleted -&gt; stream5_tcp: 'check_session_hijacking'
+deleted -&gt; stream5_tcp: 'detect_anomalies'
+deleted -&gt; stream5_tcp: 'dont_store_large_packets'
+deleted -&gt; stream5_tcp: 'ignore_any_rules'
+deleted -&gt; stream5_tcp: 'log_asymmetric_traffic'
+deleted -&gt; stream5_tcp: 'policy noack'
+deleted -&gt; stream5_tcp: 'policy unknown'
+deleted -&gt; stream5_tcp: 'use_static_footprint_sizes'
+deleted -&gt; stream5_udp: 'ignore_any_rules'
+deleted -&gt; tcpdump: '&lt;filename&gt; can no longer be specific'
+deleted -&gt; test: 'file'
+deleted -&gt; test: 'stdout'
+deleted -&gt; unified2: 'filename'
+deleted -&gt; unified2: 'mpls_event_types'
+deleted -&gt; unified2: 'vlan_event_types'</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+
+<div id="footer">
+<div id="footer-text">
+Version 3.1.78.0<br>
+Last updated
+ 2024-01-16 01:23:55 EST
+</div>
+</div>
+
+
+</body></html>

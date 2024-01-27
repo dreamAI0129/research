@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<!-- saved from url=(0097)https://docs.suricata.io/en/suricata-7.0.2/install.html#ubuntu-from-personal-package-archives-ppa -->
+<html class="writer-html5" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3. Installation — Suricata 7.0.2 documentation</title>
+      <link rel="stylesheet" href="./3. Installation — Suricata 7.0.2 documentation_files/sphinx_rtd_theme.css" type="text/css">
+      <link rel="stylesheet" href="./3. Installation — Suricata 7.0.2 documentation_files/readthedocs-doc-embed.css" type="text/css">
+      <link rel="stylesheet" href="./3. Installation — Suricata 7.0.2 documentation_files/suricata.css" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script type="text/javascript" async="" src="./3. Installation — Suricata 7.0.2 documentation_files/analytics.js.download"></script><script src="./3. Installation — Suricata 7.0.2 documentation_files/jquery.js.download"></script>
+        <script src="./3. Installation — Suricata 7.0.2 documentation_files/_sphinx_javascript_frameworks_compat.js.download"></script>
+        <script src="./3. Installation — Suricata 7.0.2 documentation_files/documentation_options.js.download"></script>
+        <script src="./3. Installation — Suricata 7.0.2 documentation_files/doctools.js.download"></script>
+        <script src="./3. Installation — Suricata 7.0.2 documentation_files/sphinx_highlight.js.download"></script>
+        <script async="async" src="./3. Installation — Suricata 7.0.2 documentation_files/readthedocs-doc-embed.js.download"></script>
+    <script src="./3. Installation — Suricata 7.0.2 documentation_files/theme.js.download"></script>
+    <link rel="index" title="Index" href="https://docs.suricata.io/en/suricata-7.0.2/genindex.html">
+    <link rel="search" title="Search" href="https://docs.suricata.io/en/suricata-7.0.2/search.html">
+    <link rel="next" title="4. Upgrading" href="https://docs.suricata.io/en/suricata-7.0.2/upgrade.html">
+    <link rel="prev" title="2. Quickstart guide" href="https://docs.suricata.io/en/suricata-7.0.2/quickstart.html"> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="./3. Installation — Suricata 7.0.2 documentation_files/readthedocs-doc-embed(1).css" type="text/css">
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/doc/userguide/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "install", "programming_language": "c", "project": "suricata", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "", "version": "suricata-7.0.2"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="./3. Installation — Suricata 7.0.2 documentation_files/readthedocs-analytics.js.download" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+<script src="./3. Installation — Suricata 7.0.2 documentation_files/js" type="text/javascript" async=""></script><script src="./3. Installation — Suricata 7.0.2 documentation_files/ethicalads.min.js.download" type="text/javascript" async="" id="ethicaladsjs"></script><style>[data-ea-publisher].loaded,[data-ea-type].loaded{font-size:14px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-weight:normal;font-style:normal;leter-spacing:0px;vertical-align:baseline;line-height:1.3em}[data-ea-publisher].loaded a,[data-ea-type].loaded a{text-decoration:none}[data-ea-publisher].loaded .ea-pixel,[data-ea-type].loaded .ea-pixel{display:none}[data-ea-publisher].loaded .ea-content,[data-ea-type].loaded .ea-content{margin:1em 1em .5em 1em;padding:1em;background:rgba(0,0,0,.03);color:#505050}[data-ea-publisher].loaded .ea-content a:link,[data-ea-type].loaded .ea-content a:link{color:#505050}[data-ea-publisher].loaded .ea-content a:visited,[data-ea-type].loaded .ea-content a:visited{color:#505050}[data-ea-publisher].loaded .ea-content a:hover,[data-ea-type].loaded .ea-content a:hover{color:#373737}[data-ea-publisher].loaded .ea-content a:active,[data-ea-type].loaded .ea-content a:active{color:#373737}[data-ea-publisher].loaded .ea-content a strong,[data-ea-publisher].loaded .ea-content a b,[data-ea-type].loaded .ea-content a strong,[data-ea-type].loaded .ea-content a b{color:#088cdb}[data-ea-publisher].loaded .ea-callout a:link,[data-ea-type].loaded .ea-callout a:link{color:#6a6a6a}[data-ea-publisher].loaded .ea-callout a:visited,[data-ea-type].loaded .ea-callout a:visited{color:#6a6a6a}[data-ea-publisher].loaded .ea-callout a:hover,[data-ea-type].loaded .ea-callout a:hover{color:#505050}[data-ea-publisher].loaded .ea-callout a:active,[data-ea-type].loaded .ea-callout a:active{color:#505050}[data-ea-publisher].loaded .ea-callout a strong,[data-ea-publisher].loaded .ea-callout a b,[data-ea-type].loaded .ea-callout a strong,[data-ea-type].loaded .ea-callout a b{color:#088cdb}[data-ea-publisher].loaded .ea-callout a,[data-ea-type].loaded .ea-callout a{font-size:.8em}[data-ea-publisher].loaded.dark .ea-content,[data-ea-type].loaded.dark .ea-content{background:rgba(255,255,255,.05);color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-content a:link,[data-ea-type].loaded.dark .ea-content a:link{color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-content a:visited,[data-ea-type].loaded.dark .ea-content a:visited{color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-content a:hover,[data-ea-type].loaded.dark .ea-content a:hover{color:#f6f6f6}[data-ea-publisher].loaded.dark .ea-content a:active,[data-ea-type].loaded.dark .ea-content a:active{color:#f6f6f6}[data-ea-publisher].loaded.dark .ea-content a strong,[data-ea-publisher].loaded.dark .ea-content a b,[data-ea-type].loaded.dark .ea-content a strong,[data-ea-type].loaded.dark .ea-content a b{color:#50baf9}[data-ea-publisher].loaded.dark .ea-callout a:link,[data-ea-type].loaded.dark .ea-callout a:link{color:#c3c3c3}[data-ea-publisher].loaded.dark .ea-callout a:visited,[data-ea-type].loaded.dark .ea-callout a:visited{color:#c3c3c3}[data-ea-publisher].loaded.dark .ea-callout a:hover,[data-ea-type].loaded.dark .ea-callout a:hover{color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-callout a:active,[data-ea-type].loaded.dark .ea-callout a:active{color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-callout a strong,[data-ea-publisher].loaded.dark .ea-callout a b,[data-ea-type].loaded.dark .ea-callout a strong,[data-ea-type].loaded.dark .ea-callout a b{color:#50baf9}@media(prefers-color-scheme: dark){[data-ea-publisher].loaded.adaptive .ea-content,[data-ea-type].loaded.adaptive .ea-content{background:rgba(255,255,255,.05);color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-content a:link,[data-ea-type].loaded.adaptive .ea-content a:link{color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-content a:visited,[data-ea-type].loaded.adaptive .ea-content a:visited{color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-content a:hover,[data-ea-type].loaded.adaptive .ea-content a:hover{color:#f6f6f6}[data-ea-publisher].loaded.adaptive .ea-content a:active,[data-ea-type].loaded.adaptive .ea-content a:active{color:#f6f6f6}[data-ea-publisher].loaded.adaptive .ea-content a strong,[data-ea-publisher].loaded.adaptive .ea-content a b,[data-ea-type].loaded.adaptive .ea-content a strong,[data-ea-type].loaded.adaptive .ea-content a b{color:#50baf9}[data-ea-publisher].loaded.adaptive .ea-callout a:link,[data-ea-type].loaded.adaptive .ea-callout a:link{color:#c3c3c3}[data-ea-publisher].loaded.adaptive .ea-callout a:visited,[data-ea-type].loaded.adaptive .ea-callout a:visited{color:#c3c3c3}[data-ea-publisher].loaded.adaptive .ea-callout a:hover,[data-ea-type].loaded.adaptive .ea-callout a:hover{color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-callout a:active,[data-ea-type].loaded.adaptive .ea-callout a:active{color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-callout a strong,[data-ea-publisher].loaded.adaptive .ea-callout a b,[data-ea-type].loaded.adaptive .ea-callout a strong,[data-ea-type].loaded.adaptive .ea-callout a b{color:#50baf9}}[data-ea-publisher].loaded .ea-content,[data-ea-type].loaded .ea-content{border:0px;border-radius:3px;box-shadow:0px 2px 3px rgba(0,0,0,.15)}[data-ea-publisher].loaded.raised .ea-content,[data-ea-type].loaded.raised .ea-content{border:0px;border-radius:3px;box-shadow:0px 2px 3px rgba(0,0,0,.15)}[data-ea-publisher].loaded.bordered .ea-content,[data-ea-type].loaded.bordered .ea-content{border:1px solid rgba(0,0,0,.04);border-radius:3px;box-shadow:none}[data-ea-publisher].loaded.bordered.dark .ea-content,[data-ea-type].loaded.bordered.dark .ea-content{border:1px solid rgba(255,255,255,.07)}@media(prefers-color-scheme: dark){[data-ea-publisher].loaded.bordered.adaptive .ea-content,[data-ea-type].loaded.bordered.adaptive .ea-content{border:1px solid rgba(255,255,255,.07)}}[data-ea-publisher].loaded.flat .ea-content,[data-ea-type].loaded.flat .ea-content{border:0px;border-radius:3px;box-shadow:none}[data-ea-type=image].loaded,[data-ea-publisher]:not([data-ea-type]).loaded,.ea-type-image{display:inline-block}[data-ea-type=image].loaded .ea-content,[data-ea-publisher]:not([data-ea-type]).loaded .ea-content,.ea-type-image .ea-content{max-width:180px;overflow:auto;text-align:center}[data-ea-type=image].loaded .ea-content>a>img,[data-ea-publisher]:not([data-ea-type]).loaded .ea-content>a>img,.ea-type-image .ea-content>a>img{width:120px;height:90px;display:inline-block}[data-ea-type=image].loaded .ea-content>.ea-text,[data-ea-publisher]:not([data-ea-type]).loaded .ea-content>.ea-text,.ea-type-image .ea-content>.ea-text{margin-top:1em;font-size:1em;text-align:center}[data-ea-type=image].loaded .ea-callout,[data-ea-publisher]:not([data-ea-type]).loaded .ea-callout,.ea-type-image .ea-callout{max-width:180px;margin:0em 1em 1em 1em;padding-left:1em;padding-right:1em;font-style:italic;text-align:right}[data-ea-type=image].loaded.horizontal .ea-content,[data-ea-publisher]:not([data-ea-type]).loaded.horizontal .ea-content,.ea-type-image.horizontal .ea-content{max-width:320px}[data-ea-type=image].loaded.horizontal .ea-content>a>img,[data-ea-publisher]:not([data-ea-type]).loaded.horizontal .ea-content>a>img,.ea-type-image.horizontal .ea-content>a>img{float:left;margin-right:1em}[data-ea-type=image].loaded.horizontal .ea-content .ea-text,[data-ea-publisher]:not([data-ea-type]).loaded.horizontal .ea-content .ea-text,.ea-type-image.horizontal .ea-content .ea-text{margin-top:0em;text-align:left;overflow:auto}[data-ea-type=image].loaded.horizontal .ea-callout,[data-ea-publisher]:not([data-ea-type]).loaded.horizontal .ea-callout,.ea-type-image.horizontal .ea-callout{max-width:320px;text-align:right}[data-ea-type=text].loaded,.ea-type-text{font-size:14px}[data-ea-type=text].loaded .ea-content,.ea-type-text .ea-content{text-align:left}[data-ea-type=text].loaded .ea-callout,.ea-type-text .ea-callout{margin:.5em 1em 1em 1em;padding-left:1em;padding-right:1em;text-align:right;font-style:italic}[data-ea-style=stickybox].loaded{position:fixed;bottom:20px;right:20px;z-index:10}[data-ea-style=stickybox].loaded .ea-type-image .ea-stickybox-hide{cursor:pointer;position:absolute;top:.75em;right:.75em;background-color:#fefefe;border:1px solid #088cdb;border-radius:50%;color:#088cdb;font-size:1em;text-align:center;height:1.5em;width:1.5em;line-height:1.5em}@media(max-width: 1300px){[data-ea-style=stickybox].loaded{position:static;bottom:0;right:0;margin:auto;text-align:center}[data-ea-style=stickybox].loaded .ea-stickybox-hide{display:none}}@media(min-width: 1301px){[data-ea-style=stickybox].loaded .ea-type-image .ea-content{background:#dcdcdc}[data-ea-style=stickybox].loaded.dark .ea-type-image .ea-content{background:#505050}}@media(min-width: 1301px)and (prefers-color-scheme: dark){[data-ea-style=stickybox].loaded.adaptive .ea-type-image .ea-content{background:#505050}}[data-ea-style=fixedfooter].loaded{position:fixed;bottom:0;left:0;z-index:200;width:100%;max-width:100%}[data-ea-style=fixedfooter].loaded .ea-type-text{width:100%;max-width:100%;display:flex;z-index:200;background:#dcdcdc}[data-ea-style=fixedfooter].loaded .ea-type-text .ea-content{border:0px;border-radius:3px;box-shadow:none}[data-ea-style=fixedfooter].loaded .ea-type-text .ea-content{background-color:inherit;max-width:100%;margin:0;padding:1em;flex:auto}[data-ea-style=fixedfooter].loaded .ea-type-text .ea-callout{max-width:100%;margin:0;padding:1em;flex:initial}@media(max-width: 576px){[data-ea-style=fixedfooter].loaded .ea-type-text .ea-callout{display:none}}[data-ea-style=fixedfooter].loaded .ea-type-text .ea-fixedfooter-hide{cursor:pointer;color:#505050;padding:1em;flex:initial;margin:auto 0}[data-ea-style=fixedfooter].loaded .ea-type-text .ea-fixedfooter-hide span{padding:.25em;font-size:.8em;font-weight:bold;border:.15em solid #505050;border-radius:.5em;white-space:nowrap}[data-ea-style=fixedfooter].loaded.dark .ea-type-text{background:#505050}[data-ea-style=fixedfooter].loaded.dark .ea-type-text .ea-fixedfooter-hide span{color:#dcdcdc;border-color:#dcdcdc}@media(prefers-color-scheme: dark){[data-ea-style=fixedfooter].loaded.adaptive .ea-type-text{background:#505050}[data-ea-style=fixedfooter].loaded.adaptive .ea-type-text .ea-fixedfooter-hide span{color:#dcdcdc;border-color:#dcdcdc}}</style><script src="./3. Installation — Suricata 7.0.2 documentation_files/saved_resource" type="text/javascript" async=""></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+
+          
+          
+          <a href="https://docs.suricata.io/en/suricata-7.0.2/index.html" class="icon icon-home">
+            Suricata
+          </a>
+              <div class="version">
+                suricata-7.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://docs.suricata.io/en/suricata-7.0.2/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current" aria-expanded="true">
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/what-is-suricata.html">1. What is Suricata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/quickstart.html">2. Quickstart guide</a></li>
+<li class="toctree-l1 current" aria-expanded="true"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#" aria-expanded="false"><button class="toctree-expand" title="Open/close menu"></button>3. Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#source"><button class="toctree-expand" title="Open/close menu"></button>3.1. Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#common-configure-options">3.1.1. Common configure options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#dependencies"><button class="toctree-expand" title="Open/close menu"></button>3.1.2. Dependencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#ubuntu-debian">3.1.2.1. Ubuntu/Debian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#centos-almalinux-rockylinux-fedora-etc">3.1.2.2. CentOS, AlmaLinux, RockyLinux, Fedora, etc</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#compilation">3.1.3. Compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#auto-setup">3.1.4. Auto-Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current" aria-expanded="true"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#binary-packages"><button class="toctree-expand" title="Open/close menu"></button>3.2. Binary packages</a><ul>
+<li class="toctree-l3 current" aria-expanded="true"><a class="reference internal current" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#ubuntu-from-personal-package-archives-ppa" aria-expanded="true"><button class="toctree-expand" title="Open/close menu"></button>3.2.1. Ubuntu from Personal Package Archives (PPA)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#upgrading">3.2.1.1. Upgrading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#remove">3.2.1.2. Remove</a></li>
+<li class="toctree-l4"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#getting-debug-or-pre-release-versions">3.2.1.3. Getting Debug or Pre-release Versions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#daily-releases">3.2.1.4. Daily Releases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#debian">3.2.2. Debian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#id2"><button class="toctree-expand" title="Open/close menu"></button>3.2.3. CentOS, AlmaLinux, RockyLinux, Fedora, etc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#installing-from-package-repositories">3.2.3.1. Installing From Package Repositories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#additional-notes-for-rpm-installations">3.2.3.2. Additional Notes for RPM Installations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#arch-based">3.2.4. Arch Based</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#advanced-installation">3.3. Advanced Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/upgrade.html">4. Upgrading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/security.html">5. Security Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/support-status.html">6. Support Status</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/command-line-options.html">7. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/rules/index.html">8. Suricata Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/rule-management/index.html">9. Rule Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/make-sense-alerts.html">10. Making sense out of Alerts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/performance/index.html">11. Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/configuration/index.html">12. Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/reputation/index.html">13. Reputation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/initscripts.html">14. Init Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/setting-up-ipsinline-for-linux.html">15. Setting up IPS/inline for Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/setting-up-ipsinline-for-windows.html">16. Setting up IPS/inline for Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/output/index.html">17. Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/lua/index.html">18. Lua support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/file-extraction/file-extraction.html">19. File Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/public-data-sets.html">20. Public Data Sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/capture-hardware/index.html">21. Using Capture Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/unix-socket.html">22. Interacting via Unix Socket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/3rd-party-integration/index.html">23. 3rd Party Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/manpages/index.html">24. Man Pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/acknowledgements.html">25. Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/licenses/index.html">26. Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/devguide/index.html">27. Suricata Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="https://docs.suricata.io/en/suricata-7.0.2/index.html">Suricata</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="https://docs.suricata.io/en/suricata-7.0.2/index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3. </span>Installation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/OISF/suricata/blob/suricata-7.0.2/doc/userguide/install.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<span id="id1"></span><h1><span class="section-number">3. </span>Installation<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#installation" title="Link to this heading"></a></h1>
+<p>Before Suricata can be used it has to be installed. Suricata can be installed
+on various distributions using binary packages: <a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#install-binary-packages"><span class="std std-ref">Binary packages</span></a>.</p>
+<p>For people familiar with compiling their own software, the <cite>Source method</cite> is
+recommended.</p>
+<p>Advanced users can check the advanced guides, see <a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#install-advanced"><span class="std std-ref">Arch Based</span></a>.</p>
+<section id="source">
+<h2><span class="section-number">3.1. </span>Source<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#source" title="Link to this heading"></a></h2>
+<p>Installing from the source distribution files gives the most control over the Suricata installation.</p>
+<p>Basic steps:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="n">xzvf</span> <span class="n">suricata</span><span class="o">-</span><span class="mf">6.0.0</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">cd</span> <span class="n">suricata</span><span class="o">-</span><span class="mf">6.0.0</span>
+<span class="o">./</span><span class="n">configure</span>
+<span class="n">make</span>
+<span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>This will install Suricata into <code class="docutils literal notranslate"><span class="pre">/usr/local/bin/</span></code>, use the default
+configuration in <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/suricata/</span></code> and will output to
+<code class="docutils literal notranslate"><span class="pre">/usr/local/var/log/suricata</span></code></p>
+<section id="common-configure-options">
+<h3><span class="section-number">3.1.1. </span>Common configure options<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#common-configure-options" title="Link to this heading"></a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-disable-gccmarch-native">
+<span class="sig-name descname"><span class="pre">--disable-gccmarch-native</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#cmdoption-disable-gccmarch-native" title="Link to this definition"></a></dt>
+<dd><p>Do not optimize the binary for the hardware it is built on. Add this
+flag if the binary is meant to be portable or if Suricata is to be used in a VM.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-prefix">
+<span class="sig-name descname"><span class="pre">--prefix</span></span><span class="sig-prename descclassname"><span class="pre">=/usr/</span></span><a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#cmdoption-prefix" title="Link to this definition"></a></dt>
+<dd><p>Installs the Suricata binary into /usr/bin/. Default <code class="docutils literal notranslate"><span class="pre">/usr/local/</span></code></p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-sysconfdir">
+<span class="sig-name descname"><span class="pre">--sysconfdir</span></span><span class="sig-prename descclassname"><span class="pre">=/etc</span></span><a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#cmdoption-sysconfdir" title="Link to this definition"></a></dt>
+<dd><p>Installs the Suricata configuration files into /etc/suricata/. Default <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/</span></code></p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-localstatedir">
+<span class="sig-name descname"><span class="pre">--localstatedir</span></span><span class="sig-prename descclassname"><span class="pre">=/var</span></span><a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#cmdoption-localstatedir" title="Link to this definition"></a></dt>
+<dd><p>Setups Suricata for logging into /var/log/suricata/. Default <code class="docutils literal notranslate"><span class="pre">/usr/local/var/log/suricata</span></code></p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-enable-lua">
+<span class="sig-name descname"><span class="pre">--enable-lua</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#cmdoption-enable-lua" title="Link to this definition"></a></dt>
+<dd><p>Enables Lua support for detection and output.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-enable-geoip">
+<span class="sig-name descname"><span class="pre">--enable-geoip</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#cmdoption-enable-geoip" title="Link to this definition"></a></dt>
+<dd><p>Enables GeoIP support for detection.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-enable-dpdk">
+<span class="sig-name descname"><span class="pre">--enable-dpdk</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#cmdoption-enable-dpdk" title="Link to this definition"></a></dt>
+<dd><p>Enables <a class="reference external" href="https://www.dpdk.org/">DPDK</a> packet capture method.</p>
+</dd></dl>
+
+</section>
+<section id="dependencies">
+<h3><span class="section-number">3.1.2. </span>Dependencies<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#dependencies" title="Link to this heading"></a></h3>
+<p>For Suricata's compilation you'll need the following libraries and their development headers installed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">libjansson</span><span class="p">,</span> <span class="n">libpcap</span><span class="p">,</span> <span class="n">libpcre2</span><span class="p">,</span> <span class="n">libyaml</span><span class="p">,</span> <span class="n">zlib</span>
+</pre></div>
+</div>
+<p>The following tools are required:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">gcc</span> <span class="p">(</span><span class="ow">or</span> <span class="n">clang</span><span class="p">)</span> <span class="n">pkg</span><span class="o">-</span><span class="n">config</span> <span class="n">rustc</span> <span class="n">cargo</span>
+</pre></div>
+</div>
+<p>Rust support:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rustc</span><span class="p">,</span> <span class="n">cargo</span>
+
+<span class="n">Some</span> <span class="n">distros</span> <span class="n">don</span><span class="s1">'t provide or provide outdated Rust packages.</span>
+<span class="n">Rust</span> <span class="n">can</span> <span class="n">also</span> <span class="n">be</span> <span class="n">installed</span> <span class="n">directly</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">Rust</span> <span class="n">project</span> <span class="n">itself</span><span class="p">::</span>
+
+  <span class="mi">1</span><span class="p">)</span> <span class="n">Install</span> <span class="n">Rust</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">rust</span><span class="o">-</span><span class="n">lang</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">en</span><span class="o">-</span><span class="n">US</span><span class="o">/</span><span class="n">install</span><span class="o">.</span><span class="n">html</span>
+  <span class="mi">2</span><span class="p">)</span> <span class="n">Install</span> <span class="n">cbindgen</span> <span class="o">-</span> <span class="k">if</span> <span class="n">the</span> <span class="n">cbindgen</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">found</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">repository</span>
+     <span class="ow">or</span> <span class="n">the</span> <span class="n">cbindgen</span> <span class="n">version</span> <span class="ow">is</span> <span class="n">lower</span> <span class="n">than</span> <span class="n">required</span><span class="p">,</span> <span class="n">it</span> <span class="n">can</span> <span class="n">be</span>
+     <span class="n">alternatively</span> <span class="n">installed</span> <span class="k">as</span><span class="p">:</span> <span class="n">cargo</span> <span class="n">install</span> <span class="o">--</span><span class="n">force</span> <span class="n">cbindgen</span>
+  <span class="mi">3</span><span class="p">)</span> <span class="n">Make</span> <span class="n">sure</span> <span class="n">the</span> <span class="n">cargo</span> <span class="n">path</span> <span class="ow">is</span> <span class="n">within</span> <span class="n">your</span> <span class="n">PATH</span> <span class="n">environment</span>
+      <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">echo</span> <span class="s1">'export PATH=”$</span><span class="si">{PATH}</span><span class="s1">:~/.cargo/bin”'</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bashrc</span>
+      <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="s2">"$</span><span class="si">{PATH}</span><span class="s2">:/root/.cargo/bin"</span>
+</pre></div>
+</div>
+<section id="ubuntu-debian">
+<h4><span class="section-number">3.1.2.1. </span>Ubuntu/Debian<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#ubuntu-debian" title="Link to this heading"></a></h4>
+<p>Minimal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Installed Rust and cargo as indicated above</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">git</span> <span class="n">libjansson</span><span class="o">-</span><span class="n">dev</span> <span class="n">libpcap</span><span class="o">-</span><span class="n">dev</span> \
+                <span class="n">libpcre2</span><span class="o">-</span><span class="n">dev</span> <span class="n">libtool</span> <span class="n">libyaml</span><span class="o">-</span><span class="n">dev</span> <span class="n">make</span> <span class="n">pkg</span><span class="o">-</span><span class="n">config</span> <span class="n">zlib1g</span><span class="o">-</span><span class="n">dev</span>
+<span class="c1"># On most distros installing cbindgen with package manager should be enough</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">cbindgen</span> <span class="c1"># alternative: cargo install --force cbindgen</span>
+</pre></div>
+</div>
+<p>Recommended:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Installed Rust and cargo as indicated above</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">autoconf</span> <span class="n">automake</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">ccache</span> <span class="n">clang</span> <span class="n">curl</span> <span class="n">git</span> \
+                <span class="n">gosu</span> <span class="n">jq</span> <span class="n">libbpf</span><span class="o">-</span><span class="n">dev</span> <span class="n">libcap</span><span class="o">-</span><span class="n">ng0</span> <span class="n">libcap</span><span class="o">-</span><span class="n">ng</span><span class="o">-</span><span class="n">dev</span> <span class="n">libelf</span><span class="o">-</span><span class="n">dev</span> \
+                <span class="n">libevent</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgeoip</span><span class="o">-</span><span class="n">dev</span> <span class="n">libhiredis</span><span class="o">-</span><span class="n">dev</span> <span class="n">libjansson</span><span class="o">-</span><span class="n">dev</span> \
+                <span class="n">liblua5</span><span class="mf">.1</span><span class="o">-</span><span class="n">dev</span> <span class="n">libmagic</span><span class="o">-</span><span class="n">dev</span> <span class="n">libnet1</span><span class="o">-</span><span class="n">dev</span> <span class="n">libpcap</span><span class="o">-</span><span class="n">dev</span> \
+                <span class="n">libpcre2</span><span class="o">-</span><span class="n">dev</span> <span class="n">libtool</span> <span class="n">libyaml</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="mi">2</span> <span class="n">libyaml</span><span class="o">-</span><span class="n">dev</span> <span class="n">m4</span> <span class="n">make</span> \
+                <span class="n">pkg</span><span class="o">-</span><span class="n">config</span> <span class="n">python3</span> <span class="n">python3</span><span class="o">-</span><span class="n">dev</span> <span class="n">python3</span><span class="o">-</span><span class="n">yaml</span> <span class="n">sudo</span> <span class="n">zlib1g</span> \
+                <span class="n">zlib1g</span><span class="o">-</span><span class="n">dev</span>
+<span class="n">cargo</span> <span class="n">install</span> <span class="o">--</span><span class="n">force</span> <span class="n">cbindgen</span>
+</pre></div>
+</div>
+<p>Extra for iptables/nftables IPS integration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libnetfilter</span><span class="o">-</span><span class="n">queue</span><span class="o">-</span><span class="n">dev</span> <span class="n">libnetfilter</span><span class="o">-</span><span class="n">queue1</span>  \
+                <span class="n">libnetfilter</span><span class="o">-</span><span class="n">log</span><span class="o">-</span><span class="n">dev</span> <span class="n">libnetfilter</span><span class="o">-</span><span class="n">log1</span>      \
+                <span class="n">libnfnetlink</span><span class="o">-</span><span class="n">dev</span> <span class="n">libnfnetlink0</span>
+</pre></div>
+</div>
+</section>
+<section id="centos-almalinux-rockylinux-fedora-etc">
+<h4><span class="section-number">3.1.2.2. </span>CentOS, AlmaLinux, RockyLinux, Fedora, etc<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#centos-almalinux-rockylinux-fedora-etc" title="Link to this heading"></a></h4>
+<p>To install all minimal dependencies, it is required to enable extra package
+repository in most distros. You can enable it possibly by
+one of the following ways:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dnf</span> <span class="o">-</span><span class="n">y</span> <span class="n">update</span>
+<span class="n">dnf</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">dnf</span><span class="o">-</span><span class="n">plugins</span><span class="o">-</span><span class="n">core</span>
+<span class="c1"># AlmaLinux 8</span>
+<span class="n">dnf</span> <span class="n">config</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">enabled</span> <span class="n">powertools</span>
+<span class="c1"># AlmaLinux 9</span>
+<span class="n">dnf</span> <span class="n">config</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">enable</span> <span class="n">crb</span>
+<span class="c1"># Oracle Linux 8</span>
+<span class="n">dnf</span> <span class="n">config</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">enable</span> <span class="n">ol8_codeready_builder</span>
+<span class="c1"># Oracle Linux 9</span>
+<span class="n">dnf</span> <span class="n">config</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">enable</span> <span class="n">ol9_codeready_builder</span>
+</pre></div>
+</div>
+<p>Minimal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Installed Rust and cargo as indicated above</span>
+<span class="n">dnf</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">gcc</span> <span class="n">gcc</span><span class="o">-</span><span class="n">c</span><span class="o">++</span> <span class="n">git</span> <span class="n">jansson</span><span class="o">-</span><span class="n">devel</span> <span class="n">libpcap</span><span class="o">-</span><span class="n">devel</span> <span class="n">libtool</span> \
+               <span class="n">libyaml</span><span class="o">-</span><span class="n">devel</span> <span class="n">make</span> <span class="n">pcre2</span><span class="o">-</span><span class="n">devel</span> <span class="n">which</span> <span class="n">zlib</span><span class="o">-</span><span class="n">devel</span>
+<span class="n">cargo</span> <span class="n">install</span> <span class="o">--</span><span class="n">force</span> <span class="n">cbindgen</span>
+</pre></div>
+</div>
+<p>Recommended:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Installed Rust and cargo as indicated above</span>
+<span class="n">dnf</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">autoconf</span> <span class="n">automake</span> <span class="n">diffutils</span> <span class="n">file</span><span class="o">-</span><span class="n">devel</span> <span class="n">gcc</span> <span class="n">gcc</span><span class="o">-</span><span class="n">c</span><span class="o">++</span> <span class="n">git</span> \
+               <span class="n">jansson</span><span class="o">-</span><span class="n">devel</span> <span class="n">jq</span> <span class="n">libcap</span><span class="o">-</span><span class="n">ng</span><span class="o">-</span><span class="n">devel</span> <span class="n">libevent</span><span class="o">-</span><span class="n">devel</span> \
+               <span class="n">libmaxminddb</span><span class="o">-</span><span class="n">devel</span> <span class="n">libnet</span><span class="o">-</span><span class="n">devel</span> <span class="n">libnetfilter_queue</span><span class="o">-</span><span class="n">devel</span> \
+               <span class="n">libnfnetlink</span><span class="o">-</span><span class="n">devel</span> <span class="n">libpcap</span><span class="o">-</span><span class="n">devel</span> <span class="n">libtool</span> <span class="n">libyaml</span><span class="o">-</span><span class="n">devel</span> \
+               <span class="n">lua</span><span class="o">-</span><span class="n">devel</span> <span class="n">lz4</span><span class="o">-</span><span class="n">devel</span> <span class="n">make</span> <span class="n">nss</span><span class="o">-</span><span class="n">devel</span> <span class="n">pcre2</span><span class="o">-</span><span class="n">devel</span> <span class="n">pkgconfig</span> \
+               <span class="n">python3</span><span class="o">-</span><span class="n">devel</span> <span class="n">python3</span><span class="o">-</span><span class="n">sphinx</span> <span class="n">python3</span><span class="o">-</span><span class="n">yaml</span> <span class="n">sudo</span> <span class="n">which</span> \
+               <span class="n">zlib</span><span class="o">-</span><span class="n">devel</span>
+<span class="n">cargo</span> <span class="n">install</span> <span class="o">--</span><span class="n">force</span> <span class="n">cbindgen</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="compilation">
+<h3><span class="section-number">3.1.3. </span>Compilation<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#compilation" title="Link to this heading"></a></h3>
+<p>Follow these steps from your Suricata directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">scripts</span><span class="o">/</span><span class="n">bundle</span><span class="o">.</span><span class="n">sh</span>
+<span class="o">./</span><span class="n">autogen</span><span class="o">.</span><span class="n">sh</span>
+<span class="o">./</span><span class="n">configure</span> <span class="c1"># you may want to add additional parameters here</span>
+<span class="c1"># ./configure --help to get all available parameters</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j8</span> <span class="c1"># j is for paralleling, you may de/increase depending on your CPU</span>
+<span class="n">make</span> <span class="n">install</span> <span class="c1"># to install your Suricata compiled binary</span>
+</pre></div>
+</div>
+</section>
+<section id="auto-setup">
+<h3><span class="section-number">3.1.4. </span>Auto-Setup<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#auto-setup" title="Link to this heading"></a></h3>
+<p>You can also use the available auto-setup features of Suricata:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">make</span> <span class="n">install</span><span class="o">-</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p><em>make install-conf</em> would do the regular "make install" and then it would automatically
+create/setup all the necessary directories and <code class="docutils literal notranslate"><span class="pre">suricata.yaml</span></code> for you.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">make</span> <span class="n">install</span><span class="o">-</span><span class="n">rules</span>
+</pre></div>
+</div>
+<p><em>make install-rules</em> would do the regular "make install" and then it would automatically
+download and set up the latest ruleset from Emerging Threats available for Suricata.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">make</span> <span class="n">install</span><span class="o">-</span><span class="n">full</span>
+</pre></div>
+</div>
+<p><em>make install-full</em> would combine everything mentioned above (install-conf and install-rules)
+and will present you with a ready-to-run (configured and set-up) Suricata.</p>
+</section>
+</section>
+<section id="binary-packages">
+<span id="install-binary-packages"></span><h2><span class="section-number">3.2. </span>Binary packages<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#binary-packages" title="Link to this heading"></a></h2>
+<section id="ubuntu-from-personal-package-archives-ppa">
+<h3><span class="section-number">3.2.1. </span>Ubuntu from Personal Package Archives (PPA)<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#ubuntu-from-personal-package-archives-ppa" title="Link to this heading"></a></h3>
+<p>For Ubuntu, OISF maintains a PPA <code class="docutils literal notranslate"><span class="pre">suricata-stable</span></code> that always contains the
+latest stable release.</p>
+<p>Setup to install the latest stable Suricata:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">software</span><span class="o">-</span><span class="n">properties</span><span class="o">-</span><span class="n">common</span>
+<span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">oisf</span><span class="o">/</span><span class="n">suricata</span><span class="o">-</span><span class="n">stable</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+</pre></div>
+</div>
+<p>Then, you can install the latest stable with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">suricata</span>
+</pre></div>
+</div>
+<p>After installing you can proceed to the <a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/quickstart.html#basic-setup"><span class="std std-ref">Basic setup</span></a>.</p>
+<p><a class="reference external" href="https://launchpad.net/~oisf/+archive/suricata-stable">OISF launchpad: suricata-stable</a>.</p>
+<section id="upgrading">
+<h4><span class="section-number">3.2.1.1. </span>Upgrading<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#upgrading" title="Link to this heading"></a></h4>
+<p>To upgrade:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">upgrade</span> <span class="n">suricata</span>
+</pre></div>
+</div>
+</section>
+<section id="remove">
+<h4><span class="section-number">3.2.1.2. </span>Remove<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#remove" title="Link to this heading"></a></h4>
+<p>To remove Suricata from your system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">remove</span> <span class="n">suricata</span>
+</pre></div>
+</div>
+</section>
+<section id="getting-debug-or-pre-release-versions">
+<h4><span class="section-number">3.2.1.3. </span>Getting Debug or Pre-release Versions<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#getting-debug-or-pre-release-versions" title="Link to this heading"></a></h4>
+<p>If you want Suricata with built-in (enabled) debugging, you can install the
+debug package:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">suricata</span><span class="o">-</span><span class="n">dbg</span>
+</pre></div>
+</div>
+<p>If you would like to help test the Release Candidate (RC) packages, the same procedures
+apply, just using another PPA: <code class="docutils literal notranslate"><span class="pre">suricata-beta</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">oisf</span><span class="o">/</span><span class="n">suricata</span><span class="o">-</span><span class="n">beta</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">upgrade</span>
+</pre></div>
+</div>
+<p>You can use both the suricata-stable and suricata-beta repositories together.
+Suricata will then always be the latest release, stable or beta.</p>
+<p><a class="reference external" href="https://launchpad.net/~oisf/+archive/suricata-beta">OISF launchpad: suricata-beta</a>.</p>
+</section>
+<section id="daily-releases">
+<h4><span class="section-number">3.2.1.4. </span>Daily Releases<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#daily-releases" title="Link to this heading"></a></h4>
+<p>If you would like to help test the daily build packages from our latest git(dev)
+repository, the same procedures as above apply, just using another PPA,
+<code class="docutils literal notranslate"><span class="pre">suricata-daily</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">oisf</span><span class="o">/</span><span class="n">suricata</span><span class="o">-</span><span class="n">daily</span><span class="o">-</span><span class="n">allarch</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">upgrade</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please have in mind that this is packaged from our latest development git master
+and is therefore potentially unstable.</p>
+<p>We do our best to make others aware of continuing development and items
+within the engine that are not yet complete or optimal. With this in mind,
+please refer to <a class="reference external" href="http://redmine.openinfosecfoundation.org/projects/suricata/issues">Suricata's issue tracker on Redmine</a>
+for an up-to-date list of what we are working on, planned roadmap,
+and to report issues.</p>
+</div>
+<p><a class="reference external" href="https://launchpad.net/~oisf/+archive/suricata-daily">OISF launchpad: suricata-daily</a>.</p>
+</section>
+</section>
+<section id="debian">
+<h3><span class="section-number">3.2.2. </span>Debian<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#debian" title="Link to this heading"></a></h3>
+<p>In Debian 9 (stretch) and later do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">suricata</span>
+</pre></div>
+</div>
+<p>In the "stable" version of Debian, Suricata is usually not available in the
+latest version. A more recent version is often available from Debian backports,
+if it can be built there.</p>
+<p>To use backports, the backports repository for the current stable
+distribution needs to be added to the system-wide sources list.
+For Debian 10 (buster), for instance, run the following as <code class="docutils literal notranslate"><span class="pre">root</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">"deb http://http.debian.net/debian buster-backports main"</span> <span class="o">&gt;</span> \
+    <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">sources</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">backports</span><span class="o">.</span><span class="n">list</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">suricata</span> <span class="o">-</span><span class="n">t</span> <span class="n">buster</span><span class="o">-</span><span class="n">backports</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3><span class="section-number">3.2.3. </span>CentOS, AlmaLinux, RockyLinux, Fedora, etc<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#id2" title="Link to this heading"></a></h3>
+<p>RPMs are provided for the latest release of <em>Enterprise Linux</em>. This
+includes CentOS Linux and rebuilds such as AlmaLinux and RockyLinux.
+Additionally, RPMs are provided for the latest supported versions of Fedora.</p>
+<p>RPMs specifically for CentOS Stream are not provided, however the RPMs for their
+related version may work fine.</p>
+<section id="installing-from-package-repositories">
+<h4><span class="section-number">3.2.3.1. </span>Installing From Package Repositories<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#installing-from-package-repositories" title="Link to this heading"></a></h4>
+<section id="centos-rhel-almalinux-rockylinux-etc-version-8">
+<h5><span class="section-number">3.2.3.1.1. </span>CentOS, RHEL, AlmaLinux, RockyLinux, etc Version 8+<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#centos-rhel-almalinux-rockylinux-etc-version-8" title="Link to this heading"></a></h5>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>dnf install epel-release dnf-plugins-core
+dnf copr enable @oisf/suricata-7.0
+dnf install suricata
+</pre></div>
+</div>
+</section>
+<section id="centos-7">
+<h5><span class="section-number">3.2.3.1.2. </span>CentOS 7<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#centos-7" title="Link to this heading"></a></h5>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>yum install epel-release yum-plugin-copr
+yum copr enable @oisf/suricata-7.0
+yum install suricata
+</pre></div>
+</div>
+</section>
+<section id="fedora">
+<h5><span class="section-number">3.2.3.1.3. </span>Fedora<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#fedora" title="Link to this heading"></a></h5>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>dnf install dnf-plugins-core
+dnf copr enable @oisf/suricata-7.0
+dnf install suricata
+</pre></div>
+</div>
+</section>
+</section>
+<section id="additional-notes-for-rpm-installations">
+<h4><span class="section-number">3.2.3.2. </span>Additional Notes for RPM Installations<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#additional-notes-for-rpm-installations" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>Suricata is pre-configured to run as the <code class="docutils literal notranslate"><span class="pre">suricata</span></code> user.</p></li>
+<li><p>Command line parameters such as providing the interface names can be
+configured in <code class="docutils literal notranslate"><span class="pre">/etc/sysconfig/suricata</span></code>.</p></li>
+<li><p>Users can run <code class="docutils literal notranslate"><span class="pre">suricata-update</span></code> without being root provided they
+are added to the <code class="docutils literal notranslate"><span class="pre">suricata</span></code> group.</p></li>
+<li><p>Directories:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">/etc/suricata</span></code>: Configuration directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/var/log/suricata</span></code>: Log directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/var/lib/suricata</span></code>: State directory rules, datasets.</p></li>
+</ul>
+</li>
+</ul>
+<section id="starting-suricata-on-boot">
+<h5><span class="section-number">3.2.3.2.1. </span>Starting Suricata On-Boot<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#starting-suricata-on-boot" title="Link to this heading"></a></h5>
+<p>The Suricata RPMs are configured to run from Systemd.</p>
+<p>To start Suricata:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">start</span> <span class="n">suricata</span>
+</pre></div>
+</div>
+<p>To stop Suricata:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">stop</span> <span class="n">suricata</span>
+</pre></div>
+</div>
+<p>To have Suricata start on-boot:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">enable</span> <span class="n">suricata</span>
+</pre></div>
+</div>
+<p>To reload rules:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">reload</span> <span class="n">suricata</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="arch-based">
+<span id="install-advanced"></span><h3><span class="section-number">3.2.4. </span>Arch Based<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#arch-based" title="Link to this heading"></a></h3>
+<p>The ArchLinux AUR contains Suricata and suricata-nfqueue packages, with commonly
+used configurations for compilation (may also be edited to your liking). You may
+use makepkg, yay (sample below), or other AUR helpers to compile and build
+Suricata packages.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yay</span> <span class="o">-</span><span class="n">S</span> <span class="n">suricata</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-installation">
+<h2><span class="section-number">3.3. </span>Advanced Installation<a class="headerlink" href="https://docs.suricata.io/en/suricata-7.0.2/install.html#advanced-installation" title="Link to this heading"></a></h2>
+<p>If you are using Ubuntu, you can follow
+<a class="reference internal" href="https://docs.suricata.io/en/suricata-7.0.2/devguide/codebase/installation-from-git.html"><span class="doc">Installation from GIT</span></a>.</p>
+<p>For other various installation guides for installing from GIT and for other operating
+systems, please check (bear in mind that those may be somewhat outdated):
+<a class="reference external" href="https://redmine.openinfosecfoundation.org/projects/suricata/wiki/Suricata_Installation">https://redmine.openinfosecfoundation.org/projects/suricata/wiki/Suricata_Installation</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="https://docs.suricata.io/en/suricata-7.0.2/quickstart.html" class="btn btn-neutral float-left" title="2. Quickstart guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="https://docs.suricata.io/en/suricata-7.0.2/upgrade.html" class="btn btn-neutral float-right" title="4. Upgrading" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr><div><div id="rtd-sidebar" data-ea-publisher="readthedocs" data-ea-type="readthedocs-sidebar" data-ea-manual="true" class="ethical-rtd loaded" data-ea-keywords="c|ids|ips|network-monitoring|nsm|readthedocs-project-62005|readthedocs-project-suricata|security" data-ea-campaign-types="community|house|paid"><div class="ethical-sidebar"><div class="ethical-content"><a href="https://server.ethicalads.io/proxy/click/5621/c1f2a504-cc39-44d7-954c-f114581aa8cc/" rel="nofollow noopener sponsored" target="_blank" class="ethical-image-link"><img src="./3. Installation — Suricata 7.0.2 documentation_files/Prelude_Logo_-_Read_the_Docs_-_240x180.png" alt="Sponsored: Prelude"></a><div class="ethical-text"><a href="https://server.ethicalads.io/proxy/click/5621/c1f2a504-cc39-44d7-954c-f114581aa8cc/" rel="nofollow noopener sponsored" target="_blank"><strong class="ea-headline">Free continuous security testing </strong><span class="ea-body">on 25 endpoints</span><strong class="ea-cta"> Get Started 🧪</strong></a></div></div><div class="ethical-callout"><small><em><a rel="nofollow noopener" target="_blank" href="https://www.ethicalads.io/?ref=rtd-sidebar">Ad by EthicalAds</a></em></small><span> &nbsp; · &nbsp; </span><a rel="nofollow noopener" target="_blank" href="https://www.ethicalads.io/advertisers/topics/devops/?ref=rtd-sidebar-buy-ads">ℹ️</a></div></div></div></div>
+
+  <div role="contentinfo">
+    <p>© Copyright 2016-2023, OISF.
+      <span class="commit">Revision <code>d07e20c0</code>.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org/">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: suricata-7.0.2
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions"><!-- Inserted RTD Footer -->
+
+<div class="injected">
+
+  
+
+      
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+        <dd>
+          <a href="https://docs.suricata.io/en/latest/install.html">latest</a>
+        </dd>
+        
+        <dd class="rtd-current-item">
+          <a href="https://docs.suricata.io/en/suricata-7.0.2/install.html">suricata-7.0.2</a>
+        </dd>
+        
+        <dd>
+          <a href="https://docs.suricata.io/en/suricata-6.0.14/install.html">suricata-6.0.14</a>
+        </dd>
+        
+      </dl>
+      
+      
+
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+        <dd><a href="https://docs.suricata.io/_/downloads/en/suricata-7.0.2/pdf/">PDF</a></dd>
+        
+        <dd><a href="https://docs.suricata.io/_/downloads/en/suricata-7.0.2/htmlzip/">HTML</a></dd>
+        
+        <dd><a href="https://docs.suricata.io/_/downloads/en/suricata-7.0.2/epub/">Epub</a></dd>
+        
+      </dl>
+      
+      
+
+      
+      <dl>
+        
+        <!-- These are kept as relative links for internal installs that are http -->
+        <dt>On Read the Docs</dt>
+        <dd>
+          <a href="https://readthedocs.org/projects/suricata/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="https://readthedocs.org/projects/suricata/builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="https://readthedocs.org/projects/suricata/downloads/">Downloads</a>
+        </dd>
+      </dl>
+      
+
+      
+
+      
+      <dl>
+        <dt>On GitHub</dt>
+        <dd>
+          <a href="https://github.com/OISF/suricata/blob/suricata-7.0.2/doc/userguide/install.rst">View</a>
+        </dd>
+        
+      </dl>
+      
+      
+
+      
+      <dl>
+        <dt>Search</dt>
+        <dd>
+          <div style="padding: 6px;">
+            
+            <form id="flyout-search-form" class="wy-form" target="_blank" action="https://readthedocs.org/projects/suricata/search/" method="get">
+              <input type="text" name="q" aria-label="Search docs" placeholder="Search docs">
+              </form>
+          </div>
+        </dd>
+      </dl>
+      
+
+      <hr>
+
+      
+        <small>
+          <span>Hosted by <a href="https://readthedocs.org/">Read the Docs</a></span>
+          <span> · </span>
+          <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+        </small>
+      
+
+      
+
+</div>
+</div>
+  </div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+
+</body></html>

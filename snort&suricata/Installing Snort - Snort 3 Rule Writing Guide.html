@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://docs.snort.org/start/installation -->
+<html lang="en" class="js sidebar-visible snort-dark"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Book generated using mdBook -->
+        
+        <title>Installing Snort - Snort 3 Rule Writing Guide</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="rgba(0, 0, 0, 0)">
+
+        
+        <link rel="icon" href="https://docs.snort.org/favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="https://docs.snort.org/favicon.png">
+        
+        <link rel="stylesheet" href="./Installing Snort - Snort 3 Rule Writing Guide_files/variables.css">
+        <link rel="stylesheet" href="./Installing Snort - Snort 3 Rule Writing Guide_files/general.css">
+        <link rel="stylesheet" href="./Installing Snort - Snort 3 Rule Writing Guide_files/chrome.css">
+        
+        <link rel="stylesheet" href="./Installing Snort - Snort 3 Rule Writing Guide_files/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com/">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+        <link href="./Installing Snort - Snort 3 Rule Writing Guide_files/css2" rel="stylesheet">
+        <link rel="stylesheet" href="./Installing Snort - Snort 3 Rule Writing Guide_files/font-awesome.css">
+        
+        <link rel="stylesheet" href="./Installing Snort - Snort 3 Rule Writing Guide_files/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="./Installing Snort - Snort 3 Rule Writing Guide_files/highlight.css">
+        <link rel="stylesheet" href="./Installing Snort - Snort 3 Rule Writing Guide_files/tomorrow-night.css" disabled="">
+        <link rel="stylesheet" href="./Installing Snort - Snort 3 Rule Writing Guide_files/ayu-highlight.css" disabled="">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "snort-dark" : "snort-dark";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('snort-dark')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents" aria-hidden="false">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="https://docs.snort.org/welcome.html" tabindex="0">Snort 3 Rule Writing Guide</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/intro.html" tabindex="0">Introduction</a></li><li class="chapter-item expanded affix "></li><li class="part-title">Using Snort 3</li><li class="chapter-item expanded "><a href="https://docs.snort.org/start/index.html" tabindex="0">Getting Started with Snort 3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="https://docs.snort.org/start/installation.html" class="active" tabindex="0">Installing Snort</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/start/running.html" tabindex="0">Using Snort</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="https://docs.snort.org/start/help.html" tabindex="0">Command Line Basics</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/start/inspection.html" tabindex="0">Reading Traffic</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/start/configuration.html" tabindex="0">Configuration</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/start/rules.html" tabindex="0">Rules</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/start/wizard_binder.html" tabindex="0">Wizard and Binder</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/start/tweaks_scripts.html" tabindex="0">Tweaks and Scripts</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/start/tracing.html" tabindex="0">Trace Modules</a></li></ol></li></ol></li><li class="chapter-item expanded "></li><li class="part-title">Writing Snort Rules</li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/index.html" tabindex="0">The Basics</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/headers/index.html" tabindex="0">Rule Headers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/headers/actions.html" tabindex="0">Rule Actions</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/headers/protocols.html" tabindex="0">Protocols</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/headers/ips.html" tabindex="0">IP Addresses</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/headers/ports.html" tabindex="0">Port Numbers</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/headers/directions.html" tabindex="0">Direction Operators</a></li></ol></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/headers/new_header_types.html" tabindex="0">New Rule Types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/headers/service_rules.html" tabindex="0">Service Rules</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/headers/file_rules.html" tabindex="0">File Rules</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/headers/file_id_rules.html" tabindex="0">File Identification Rules</a></li></ol></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/index.html" tabindex="0">Rule Options</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/key.html" tabindex="0">Rule Option Syntax Key</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/general/index.html" tabindex="0">General Rule Options</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/general/msg.html" tabindex="0">msg</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/general/reference.html" tabindex="0">reference</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/general/gid.html" tabindex="0">gid</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/general/sid.html" tabindex="0">sid</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/general/rev.html" tabindex="0">rev</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/general/classtype.html" tabindex="0">classtype</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/general/priority.html" tabindex="0">priority</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/general/metadata.html" tabindex="0">metadata</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/general/service.html" tabindex="0">service</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/general/rem.html" tabindex="0">rem</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/general/file_meta.html" tabindex="0">file_meta</a></li></ol></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/index.html" tabindex="0">Payload Detection Rule Options</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/content.html" tabindex="0">content</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/fast_pattern.html" tabindex="0">fast_pattern</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/nocase.html" tabindex="0">nocase</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/oddw.html" tabindex="0">offset, depth, distance, and within</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/index.html" tabindex="0">HTTP Specific Options</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/uri.html" tabindex="0">http_uri and http_raw_uri</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/header.html" tabindex="0">http_header and http_raw_header</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/cookie.html" tabindex="0">http_cookie and http_raw_cookie</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/body.html" tabindex="0">http_client_body and http_raw_body</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/param.html" tabindex="0">http_param</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/method.html" tabindex="0">http_method</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/version.html" tabindex="0">http_version</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/stat_code.html" tabindex="0">http_stat_code</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/stat_msg.html" tabindex="0">http_stat_msg</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/raw_req-raw_status.html" tabindex="0">http_raw_request and http_raw_status</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/trailer.html" tabindex="0">http_trailer and http_raw_trailer</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/true_ip.html" tabindex="0">http_true_ip</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/version_match.html" tabindex="0">http_version_match</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/num_headers.html" tabindex="0">http_num_headers</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/num_trailers.html" tabindex="0">http_num_trailers</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/num_cookies.html" tabindex="0">http_num_cookies</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/header_test.html" tabindex="0">http_header_test</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/trailer_test.html" tabindex="0">http_trailer_test</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/http/req_resp_detection.html" tabindex="0">Combining Request and Response Detection</a></li></ol></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/bufferlen.html" tabindex="0">bufferlen</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/isdataat.html" tabindex="0">isdataat</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/dsize.html" tabindex="0">dsize</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/pcre.html" tabindex="0">pcre</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/regex.html" tabindex="0">regex</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/pkt_data.html" tabindex="0">pkt_data</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/raw_data.html" tabindex="0">raw_data</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/file_data.html" tabindex="0">file_data</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/js_data.html" tabindex="0">js_data</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/vba_data.html" tabindex="0">vba_data</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/base64.html" tabindex="0">base64_decode and base64_data</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/byte_extract.html" tabindex="0">byte_extract</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/byte_test.html" tabindex="0">byte_test</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/byte_math.html" tabindex="0">byte_math</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/byte_jump.html" tabindex="0">byte_jump</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/ber.html" tabindex="0">ber_data and ber_skip</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/ssl.html" tabindex="0">ssl_state and ssl_version</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/dce.html" tabindex="0">DCE Specific Options</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/sip.html" tabindex="0">SIP Specific Options</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/sd_pattern.html" tabindex="0">sd_pattern</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/cvs.html" tabindex="0">cvs</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/hash.html" tabindex="0">md5, sha256, and sha512</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/gtp.html" tabindex="0">GTP Specific Options</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/dnp3.html" tabindex="0">DNP3 Specific Options</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/cip.html" tabindex="0">CIP Specific Options</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/iec104.html" tabindex="0">IEC 104 Specific Options</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/mms.html" tabindex="0">MMS Specific Options</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/modbus.html" tabindex="0">Modbus Specific Options</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/payload/s7commplus.html" tabindex="0">S7CommPlus Specific Options</a></li></ol></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/index.html" tabindex="0">Non-Payload Detection Rule Options</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/fragoffset.html" tabindex="0">fragoffset</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/ttl.html" tabindex="0">ttl</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/tos.html" tabindex="0">tos</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/id.html" tabindex="0">id</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/ipopts.html" tabindex="0">ipopts</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/fragbits.html" tabindex="0">fragbits</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/ip_proto.html" tabindex="0">ip_proto</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/flags.html" tabindex="0">flags</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/flow.html" tabindex="0">flow</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/flowbits.html" tabindex="0">flowbits</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/file_type.html" tabindex="0">file_type</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/seq.html" tabindex="0">seq</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/ack.html" tabindex="0">ack</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/window.html" tabindex="0">window</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/itype.html" tabindex="0">itype</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/icode.html" tabindex="0">icode</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/icmp_id.html" tabindex="0">icmp_id</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/icmp_seq.html" tabindex="0">icmp_seq</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/rpc.html" tabindex="0">rpc</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/stream_reassemble.html" tabindex="0">stream_reassemble</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/non_payload/stream_size.html" tabindex="0">stream_size</a></li></ol></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/post/index.html" tabindex="0">Post-Detection Rule Options</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/post/detection_filter.html" tabindex="0">detection_filter</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/post/replace.html" tabindex="0">replace</a></li><li class="chapter-item expanded "><a href="https://docs.snort.org/rules/options/post/tag.html" tabindex="0">tag</a></li></ol></li></ol></li><li class="chapter-item expanded "></li><li class="part-title">Miscellaneous Information</li><li class="chapter-item expanded "><a href="https://docs.snort.org/misc/shared-object-rules.html" tabindex="0">Shared Object Rules</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar bordered sticky" style="top: 2610px;">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar" aria-expanded="true">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="snort-light">Snort Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="snort-dark">Snort Dark</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Snort 3 Rule Writing Guide</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="https://docs.snort.org/print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        
+
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="snort-3-installation"><a class="header" href="https://docs.snort.org/start/installation#snort-3-installation">Snort 3 Installation</a></h1>
+<h2 id="required-packages"><a class="header" href="https://docs.snort.org/start/installation#required-packages">Required Packages</a></h2>
+<p>The very first thing to do is make sure all necessary dependencies are installed. The following is a list of required packages:</p>
+<ul>
+<li>cmake to build from source</li>
+<li>The Snort 3 libdaq for packet IO</li>
+<li>dnet for network utility functions</li>
+<li>flex &gt;= 2.6.0 for JavaScript syntax parsing</li>
+<li>g++ &gt;= 5 or other C++14 compiler</li>
+<li>hwloc for CPU affinity management</li>
+<li>LuaJIT for configuration and scripting</li>
+<li>OpenSSL for SHA and MD5 file signatures, the protected_content rule option, and SSL service detection</li>
+<li>pcap for tcpdump style logging</li>
+<li>pcre for regular expression pattern matching</li>
+<li>pkgconfig to locate build dependencies</li>
+<li>zlib for decompression</li>
+</ul>
+<p>Information on where to download each of these <em>required</em> packages can be found here: <a href="https://github.com/snort3/snort3/blob/master/doc/user/tutorial.txt#L6">https://github.com/snort3/snort3/blob/master/doc/user/tutorial.txt#L6</a>.</p>
+<h2 id="optional-packages"><a class="header" href="https://docs.snort.org/start/installation#optional-packages">Optional Packages</a></h2>
+<p>There are also a few optional packages that can be installed to take advantage of some of Snort's optional features. These include:</p>
+<ul>
+<li>asciidoc to build the HTML manual</li>
+<li>cpputest to run additional unit tests with make check</li>
+<li>dblatex to build the PDF manual included with Snort 3 installs</li>
+<li>flatbuffers for enabling the flatbuffers serialization format</li>
+<li>hyperscan &gt;= 4.4.0 to build the new regex and sd_pattern rule options and hyperscan search engine.</li>
+<li>iconv for converting UTF16-LE filenames to UTF8 (usually included in glibc)</li>
+<li>libunwind to attempt to dump a somewhat readable backtrace when a fatal signal is received</li>
+<li>lzma &gt;= 5.1.2 for decompression of SWF and PDF files</li>
+<li>safec &gt;= 3.5 for runtime bounds checks on certain legacy C-library calls</li>
+<li>source-highlight to generate the dev guide</li>
+<li>w3m from to build the plain text manual</li>
+<li>uuid from uuid-dev package for unique identifiers</li>
+</ul>
+<p>Information on where to download each of these <em>optional</em> packages can be found here: <a href="https://github.com/snort3/snort3/blob/master/doc/user/tutorial.txt#L36">https://github.com/snort3/snort3/blob/master/doc/user/tutorial.txt#L36</a>.</p>
+<h2 id="installing-libdaq"><a class="header" href="https://docs.snort.org/start/installation#installing-libdaq">Installing LibDAQ</a></h2>
+<p>We now need to install the Snort 3 LibDAQ, which provides an abstraction layer for communicating with a data source (such as a network interface).</p>
+<p>If you have LibDAQ already installed for Snort 2 and want to install a DAQ just for Snort 3, or if you want to install LibDAQ in a custom location, you can change the DAQ install location with the <code class="hljs">--prefix</code> option when configuring: <code class="hljs">./configure --prefix=/usr/local/lib/daq_s3</code>.</p>
+<p>To show this in action, first clone the LibDAQ repository from GitHub:</p>
+<pre><code class="hljs">$ git clone https://github.com/snort3/libdaq.git
+</code></pre>
+<p>Then, run the following commands to generate the configure script, configure with a specified prefix, build, and lastly install:</p>
+<pre><code class="hljs">$ cd libdaq
+$ ./bootstrap
+$ ./configure --prefix=/usr/local/lib/daq_s3
+$ make install
+</code></pre>
+<p>After installing libdaq, you must then run <code class="hljs">ldconfig</code> to configure your system's dynamic linker run-time bindings. However, if you have installed the DAQ in a nonstandard location, you'll first need to tell your system where to find the new shared libraries. One common solution is to create a file in the <code class="hljs">/etc/ld.so.conf.d/</code> directory that points to where those libraries are located:</p>
+<pre><code class="hljs">$ cat /etc/ld.so.conf.d/libdaq3.conf
+/usr/local/lib/daq_s3/lib/
+</code></pre>
+<p>Once ready you may proceed with the <code class="hljs">ldconfig</code> command to configure the run-time bindings:</p>
+<pre><code class="hljs">$ sudo ldconfig
+</code></pre>
+<h2 id="building-snort"><a class="header" href="https://docs.snort.org/start/installation#building-snort">Building Snort</a></h2>
+<p>After all dependencies have been installed, it is time to build Snort. </p>
+<p>To do this, first clone the Snort 3 repository:</p>
+<pre><code class="hljs">$ git clone https://github.com/snort3/snort3.git
+</code></pre>
+<p>You can choose to install Snort in the system-default directories, or you can specify to install it in some other directory with the <code class="hljs">--prefix=&lt;path&gt;</code> command line argument.</p>
+<pre><code class="hljs">$ export my_path=/path/to/snorty
+$ mkdir -p $my_path
+$ cd snort3
+$ ./configure_cmake.sh --prefix=$my_path 
+</code></pre>
+<p>Additionally, if the LibDAQ has been installed in a non-standard or custom location, then you must include the <code class="hljs">--with-daq-libraries</code> and <code class="hljs">--with-daq-includes</code> arguments and set them accordingly.</p>
+<pre><code class="hljs">$ ./configure_cmake.sh --prefix=$my_path \
+                       --with-daq-includes=/usr/local/lib/daq_s3/include/ \
+                       --with-daq-libraries=/usr/local/lib/daq_s3/lib/
+</code></pre>
+<p>There are many more CMake configuration options to choose from (like enabling debug mode, for example), and the full list of options can be seen by running the following command:</p>
+<pre><code class="hljs">$ ./configure_cmake.sh --help
+</code></pre>
+<p>Once you've configured CMake to your liking and the build files are ready to go, it's time to compile and install Snort. To do this, <code class="hljs">cd</code> to the newly-created <code class="hljs">build</code> directory, and then compile and install:</p>
+<pre><code class="hljs">$ cd build
+$ make -j $(nproc)
+$ make install
+</code></pre>
+<p>If all goes well, run <code class="hljs">snort -V</code> at the command line to verify successful installation.</p>
+<pre><code class="hljs">$ $my_path/bin/snort -V
+
+   ,,_     -*&gt; Snort++ &lt;*-
+  o"  )~   Version 3.1.36.0
+   ''''    By Martin Roesch &amp; The Snort Team
+           http://snort.org/contact#team
+           Copyright (C) 2014-2022 Cisco and/or its affiliates. All rights reserved.
+           Copyright (C) 1998-2013 Sourcefire, Inc., et al.
+           Using DAQ version 3.0.6
+           Using LuaJIT version 2.1.0-beta3
+           Using OpenSSL 1.1.1q  5 Jul 2022
+           Using libpcap version 1.10.1 (with TPACKET_V3)
+           Using PCRE version 8.45 2021-06-15
+           Using ZLIB version 1.2.12
+           Using LZMA version 5.2.6
+</code></pre>
+<p>Lastly, verify that your installation has the appropriate DAQs available to it:</p>
+<pre><code class="hljs">$ $my_path/bin/snort --daq-list
+Available DAQ modules:
+afpacket(v7): live inline multi unpriv
+ Variables:
+  buffer_size_mb &lt;arg&gt; - Packet buffer space to allocate in megabytes
+  debug - Enable debugging output to stdout
+  fanout_type &lt;arg&gt; - Fanout loadbalancing method
+  fanout_flag &lt;arg&gt; - Fanout loadbalancing option
+  use_tx_ring - Use memory-mapped TX ring
+…
+</code></pre>
+<p>If, however, you get <code class="hljs">No available DAQ modules (try adding directories with --daq-dir).</code>, then you will need to specify <code class="hljs">--daq-dir</code> as the error points out:</p>
+<pre><code class="hljs">$ $my_path/bin/snort --daq-dir /usr/local/lib/daq_s3/lib/daq --daq-list
+</code></pre>
+<p>If that's the case, you can create an "alias" for your Snort command so that you don't have to specify <code class="hljs">--daq-dir</code> each time you want to invoke Snort:</p>
+<pre><code class="language-sh hljs bash"><span class="hljs-built_in">alias</span> snort=<span class="hljs-string">'/path/to/bin/snort --daq-dir /usr/local/lib/daq_s3/lib/daq'</span>
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="https://docs.snort.org/start/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="https://docs.snort.org/start/running.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="https://docs.snort.org/start/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="https://docs.snort.org/start/running.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+        
+
+        
+
+        
+
+        
+
+        
+        <script src="./Installing Snort - Snort 3 Rule Writing Guide_files/elasticlunr.min.js.download" type="text/javascript" charset="utf-8"></script>
+        <script src="./Installing Snort - Snort 3 Rule Writing Guide_files/mark.min.js.download" type="text/javascript" charset="utf-8"></script>
+        <script src="./Installing Snort - Snort 3 Rule Writing Guide_files/searcher.js.download" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="./Installing Snort - Snort 3 Rule Writing Guide_files/clipboard.min.js.download" type="text/javascript" charset="utf-8"></script>
+        <script src="./Installing Snort - Snort 3 Rule Writing Guide_files/highlight.js.download" type="text/javascript" charset="utf-8"></script>
+        <script src="./Installing Snort - Snort 3 Rule Writing Guide_files/book.js.download" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    <script defer="" src="./Installing Snort - Snort 3 Rule Writing Guide_files/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" data-cf-beacon="{&quot;rayId&quot;:&quot;847cc6bf5fb0376d&quot;,&quot;version&quot;:&quot;2024.1.0&quot;,&quot;token&quot;:&quot;259dc4eadf5b43fbbc95b1d26ba39d7c&quot;}" crossorigin="anonymous"></script>
+
+
+</body></html>
